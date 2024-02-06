@@ -1,12 +1,13 @@
 package frames;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class DashboardFrame extends JFrame {
+public class VentasFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -14,7 +15,7 @@ public class DashboardFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DashboardFrame() {
+	public VentasFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1092, 664);
 		contentPane = new JPanel();
@@ -23,9 +24,10 @@ public class DashboardFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Dashboard");
-		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblNewLabel.setBounds(10, 604, 126, 13);
-		contentPane.add(lblNewLabel);
+		JLabel lblMantenimiento = new JLabel("Ventas");
+		lblMantenimiento.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblMantenimiento.setBounds(10, 604, 126, 13);
+		contentPane.add(lblMantenimiento);
 	}
+
 }
