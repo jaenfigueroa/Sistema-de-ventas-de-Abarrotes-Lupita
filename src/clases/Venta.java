@@ -1,23 +1,40 @@
 package clases;
 
+import utilidades.Utilidades;
+
+
 public class Venta {
 	
 	// Atributos
-	private int codigoVenta;
+	private int codigoVenta; // Autogenerado y correlativo a partir de 3001
 	private int codigoCliente;
 	private int codigoProducto;
 	private int cantidad;
 	private double precio;
-	private String fecha;
+	private String fecha; // Formato: mm/dd/aaaa
+	
+	// Variables de clase
+	private static int codigoCorrelativoAPartir;
+	private static int cantidadVentas;
+	
+	// Bloque de inicializacion static
+	static {
+		codigoCorrelativoAPartir = 3001;
+		cantidadVentas = 0;
+	}
 	
 	// Contructor
-	public Venta(int codigoVenta, int codigoCliente, int codigoProducto, int cantidad, double precio, String fecha) {
-		this.codigoVenta = codigoVenta;
+	public Venta(int codigoCliente, int codigoProducto, int cantidad, double precio) {
+		this.codigoVenta = Venta.codigoCorrelativoAPartir + Venta.cantidadVentas;
+
 		this.codigoCliente = codigoCliente;
 		this.codigoProducto = codigoProducto;
 		this.cantidad = cantidad;
 		this.precio = precio;
-		this.fecha = fecha;
+
+		this.fecha = Utilidades.obtenerFechaActualFormateadoMDA();
+		
+		Venta.cantidadVentas++;
 	}
 
 	// Getters y setters

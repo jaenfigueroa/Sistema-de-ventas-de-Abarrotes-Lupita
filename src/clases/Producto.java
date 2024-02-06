@@ -1,23 +1,37 @@
 package clases;
 
+
 public class Producto {
 	
 	// Atributos
-	private int codigoProducto;
+	private int codigoProducto; // Autogenerado y correlativo a partir de 2001 
 	private String nombre;
 	private double precio;
 	private int stockActual;
 	private int stockMinimo;
 	private int stockMaximo;
 	
+	// Variables de clase
+	private static int codigoCorrelativoAPartir;
+	private static int cantidadProductos;
+	
+	// Bloque de inicializacion static
+	static {
+		codigoCorrelativoAPartir = 2001;
+		cantidadProductos = 0;
+	}
+	
 	// COntructor
-	public Producto(int codigoProducto, String nombre, double precio, int stockActual, int stockMinimo, int stockMaximo) {
-		this.codigoProducto = codigoProducto;
+	public Producto(String nombre, double precio, int stockActual, int stockMinimo, int stockMaximo) {
+		this.codigoProducto =  Producto.codigoCorrelativoAPartir + Producto.cantidadProductos;
+		
 		this.nombre = nombre;
 		this.precio = precio;
 		this.stockActual = stockActual;
 		this.stockMinimo = stockMinimo;
 		this.stockMaximo = stockMaximo;
+		
+		Producto.cantidadProductos++;
 	}
 
 	// Getters y Setters

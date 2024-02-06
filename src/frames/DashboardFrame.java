@@ -21,9 +21,5 @@ public class DashboardFrame extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Hola mundo");
-		lblNewLabel.setBounds(156, 115, 112, 13);
-		contentPane.add(lblNewLabel);
 	}
 }
