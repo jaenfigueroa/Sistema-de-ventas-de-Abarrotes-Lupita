@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class MantenimientoFrame extends JFrame {
+public class ProductosFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -15,7 +15,7 @@ public class MantenimientoFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MantenimientoFrame() {
+	public ProductosFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1092, 664);
 		contentPane = new JPanel();
@@ -24,7 +24,7 @@ public class MantenimientoFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblMantenimiento = new JLabel("Mantenimiento");
+		JLabel lblMantenimiento = new JLabel("Productos");
 		lblMantenimiento.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblMantenimiento.setBounds(10, 604, 126, 13);
 		contentPane.add(lblMantenimiento);
