@@ -17,17 +17,17 @@ public class Venta {
 	private static int cantidadVentas;
 	
 	// Constantes de clase
-	private static final int codigoCorrelativoAPartir;
+	private static final int CODIGO_CORRELATIVO_A_PARTIR;
 	
 	// Bloque de inicializacion static
 	static {
 		cantidadVentas = 0;
-		codigoCorrelativoAPartir = 3001;
+		CODIGO_CORRELATIVO_A_PARTIR = 3001;
 	}
 	
 	// Contructores
 	public Venta(int codigoCliente, int codigoProducto, int cantidad, double precio) {
-		this.codigoVenta = Venta.codigoCorrelativoAPartir + Venta.cantidadVentas;
+		this.codigoVenta = Venta.CODIGO_CORRELATIVO_A_PARTIR + Venta.cantidadVentas;
 
 		this.codigoCliente = codigoCliente;
 		this.codigoProducto = codigoProducto;
@@ -86,6 +86,20 @@ public class Venta {
 
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+	
+	// Getters y Setters para variables de clase
+	public static int getCantidadVentas() {
+		return Venta.cantidadVentas;
+	}
+
+	public static void setCantidadVentas(int cantidadVentas) {
+		Venta.cantidadVentas = cantidadVentas;
+	}
+
+	// Getters para constantes de clase
+	public static int getCodigoCorrelativoAPartir() {
+		return Venta.CODIGO_CORRELATIVO_A_PARTIR;
 	}
 	
 	// Metodos

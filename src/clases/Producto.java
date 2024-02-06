@@ -15,17 +15,17 @@ public class Producto {
 	private static int cantidadProductos;
 	
 	// Constantes de clase
-	private static final int codigoCorrelativoAPartir;
+	private static final int CODIGO_CORRELATIVO_A_PARTIR;
 	
 	// Bloque de inicializacion static
 	static {
 		cantidadProductos = 0;
-		codigoCorrelativoAPartir = 2001;
+		CODIGO_CORRELATIVO_A_PARTIR = 2001;
 	}
 	
 	// COntructores
 	public Producto(String nombre, double precio, int stockActual, int stockMinimo, int stockMaximo) {
-		this.codigoProducto =  Producto.codigoCorrelativoAPartir + Producto.cantidadProductos;
+		this.codigoProducto =  Producto.CODIGO_CORRELATIVO_A_PARTIR + Producto.cantidadProductos;
 		
 		this.nombre = nombre;
 		this.precio = precio;
@@ -84,6 +84,20 @@ public class Producto {
 	public void setStockMaximo(int stockMaximo) {
 		this.stockMaximo = stockMaximo;
 	}
+
+	// Getters y setters para variables de clase
+	public static int getCantidadProductos() {
+		return Producto.cantidadProductos;
+	}
+
+	public static void setCantidadProductos(int cantidadProductos) {
+		Producto.cantidadProductos = cantidadProductos;
+	}
+
+	// Getters para contantes de clase
+	public static int getCodigoCorrelativoAPartir() {
+		return Producto.CODIGO_CORRELATIVO_A_PARTIR;
+	}	
 	
 	// Metodos
 	

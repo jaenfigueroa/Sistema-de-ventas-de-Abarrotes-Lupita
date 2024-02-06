@@ -15,17 +15,17 @@ public class Cliente {
 	private static int cantidadClientes;
 	
 	// Constantes de clase
-	private static final int codigoCorrelativoAPartir;
+	private static final int CODIGO_CORRELATIVO_A_PARTIR;
 	
 	// Bloque de inicializacion static
 	static {
 		cantidadClientes = 0;
-		codigoCorrelativoAPartir = 1001;
+		CODIGO_CORRELATIVO_A_PARTIR = 1001;
 	}
 	
 	// Contructores
 	public Cliente(String nombres, String apellidos, String direccion, String telefono, String dni) {
-		this.codigoCliente = Cliente.codigoCorrelativoAPartir + Cliente.cantidadClientes;
+		this.codigoCliente = Cliente.CODIGO_CORRELATIVO_A_PARTIR + Cliente.cantidadClientes;
 		
 		this.nombres = nombres;
 		this.apellidos = apellidos;
@@ -36,7 +36,7 @@ public class Cliente {
 		Cliente.cantidadClientes++;
 	}
 
-	// Getters y Setters
+	// Getters y Setters para atributos
 	public int getCodigoCliente() {
 		return this.codigoCliente;
 	}
@@ -83,6 +83,20 @@ public class Cliente {
 
 	public void setDni(String dni) {
 		this.dni = dni;
+	}
+	
+	// Getters y Setters para variables de clase
+	public static int getCantidadClientes() {
+		return Cliente.cantidadClientes;
+	}
+
+	public static void setCantidadClientes(int cantidadClientes) {
+		Cliente.cantidadClientes = cantidadClientes;
+	}
+
+	// Getters para contantes de clase
+	public static int getCodigoCorrelativoAPartir() {
+		return Cliente.CODIGO_CORRELATIVO_A_PARTIR;
 	}
 	
 	// Metodos
