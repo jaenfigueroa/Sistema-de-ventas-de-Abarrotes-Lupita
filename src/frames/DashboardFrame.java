@@ -28,4 +28,8 @@ public class DashboardFrame extends JFrame {
 		lblNewLabel.setBounds(10, 604, 126, 13);
 		contentPane.add(lblNewLabel);
 	}
+	
+	// Metodos
+	
+	
 }

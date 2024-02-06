@@ -30,4 +30,7 @@ public class AlmacenFrame extends JFrame {
 		contentPane.add(lblMantenimiento);
 	}
 
+	// Metodos
+	
+	
 }

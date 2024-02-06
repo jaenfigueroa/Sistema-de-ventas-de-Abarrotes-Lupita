@@ -29,5 +29,10 @@ public class ReportesFrame extends JFrame {
 		lblMantenimiento.setBounds(10, 604, 126, 13);
 		contentPane.add(lblMantenimiento);
 	}
+	
+	// Metodos
+	
+	
+	
 
 }
