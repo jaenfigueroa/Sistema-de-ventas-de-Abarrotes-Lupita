@@ -14,16 +14,18 @@ public class Venta {
 	private String fecha; // Formato: mm/dd/aaaa
 	
 	// Variables de clase
-	private static int codigoCorrelativoAPartir;
 	private static int cantidadVentas;
+	
+	// Constantes de clase
+	private static final int codigoCorrelativoAPartir;
 	
 	// Bloque de inicializacion static
 	static {
-		codigoCorrelativoAPartir = 3001;
 		cantidadVentas = 0;
+		codigoCorrelativoAPartir = 3001;
 	}
 	
-	// Contructor
+	// Contructores
 	public Venta(int codigoCliente, int codigoProducto, int cantidad, double precio) {
 		this.codigoVenta = Venta.codigoCorrelativoAPartir + Venta.cantidadVentas;
 
@@ -86,7 +88,7 @@ public class Venta {
 		this.fecha = fecha;
 	}
 	
-
+	// Metodos
 	
 	
 	

@@ -12,16 +12,18 @@ public class Producto {
 	private int stockMaximo;
 	
 	// Variables de clase
-	private static int codigoCorrelativoAPartir;
 	private static int cantidadProductos;
+	
+	// Constantes de clase
+	private static final int codigoCorrelativoAPartir;
 	
 	// Bloque de inicializacion static
 	static {
-		codigoCorrelativoAPartir = 2001;
 		cantidadProductos = 0;
+		codigoCorrelativoAPartir = 2001;
 	}
 	
-	// COntructor
+	// COntructores
 	public Producto(String nombre, double precio, int stockActual, int stockMinimo, int stockMaximo) {
 		this.codigoProducto =  Producto.codigoCorrelativoAPartir + Producto.cantidadProductos;
 		
@@ -83,6 +85,7 @@ public class Producto {
 		this.stockMaximo = stockMaximo;
 	}
 	
+	// Metodos
 	
 	
 	
