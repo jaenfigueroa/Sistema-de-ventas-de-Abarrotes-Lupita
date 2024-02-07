@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import clases.Cliente;
 
@@ -28,7 +30,10 @@ public class ClientesFrame extends JFrame {
 	private JTextField tf_dni;
 	private JTextField tf_telefono;
 	private JTextField tf_codigoCliente;
-
+	
+	///////////////////////////////
+//	private JTable table;
+//	DefaultTableModel model = new DefaultTableModel();
 	
 	private JTextArea ta_resultados;
 
@@ -82,6 +87,28 @@ public class ClientesFrame extends JFrame {
 		lblNewLabel_1_1.setBounds(10, 197, 96, 13);
 		contentPane.add(lblNewLabel_1_1);
 		
+		/////////////////////////////
+//	    model.addColumn("Nombres");
+//	    model.addColumn("Apellidos");
+//	    model.addColumn("Dirección");
+//	    model.addColumn("Telefono");
+//	    model.addColumn("DNI");
+//	    
+//	    
+//		table = new JTable(model);
+//		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		//scrollPane_1.setViewportView(table);
+		
+		
+//        TableColumn columnaMarca = table.getColumnModel().getColumn(1);
+//        TableColumn columnaCantidad = table.getColumnModel().getColumn(1);
+//        TableColumn columnaImporte = table.getColumnModel().getColumn(0);
+//
+//        columnaMarca.setPreferredWidth(200);
+//        columnaCantidad.setPreferredWidth(50);   
+//        columnaImporte.setPreferredWidth(150);
+        /////////////////////////////
+		
 		tf_dni = new JTextField();
 		tf_dni.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_dni.setColumns(10);
@@ -116,6 +143,15 @@ public class ClientesFrame extends JFrame {
 		contentPane.add(tf_codigoCliente);
 		
 		JComboBox cb_opciones = new JComboBox();
+		cb_opciones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int opcionElegida = cb_opciones.getSelectedIndex();
+				
+				if(opcionElegida == 1) {
+					tf_codigoCliente.setEditable(true);
+				}
+			}
+		});
 		cb_opciones.setModel(new DefaultComboBoxModel(new String[] {"Crear", "Modificar", "Consultar", "Eliminar", "Listar"}));
 		cb_opciones.setBounds(867, 26, 180, 19);
 		contentPane.add(cb_opciones);
@@ -129,6 +165,7 @@ public class ClientesFrame extends JFrame {
 				String direccion = tf_direccion.getText();
 				String telefono = tf_telefono.getText();
 				String dni = tf_dni.getText();
+				int codigoCliente = Integer.parseInt(tf_codigoCliente.getText());
 				
 				// Recoger la accion a realizar
 				int accionARealizar = cb_opciones.getSelectedIndex();
@@ -140,18 +177,30 @@ public class ClientesFrame extends JFrame {
 				switch (accionARealizar) {
 					case 0:
 						cliente = new Cliente(nombres, apellidos, direccion, telefono, dni);
+						Cliente.setClientes(cliente);
 						break;
 					case 1:
-						cliente = Cliente.modificarCliente();
+						
+						Cliente clienteEncontrado = Cliente.consultarCliente(codigoCliente);
+						
+						clienteEncontrado.setNombres(nombres);
+						clienteEncontrado.setApellidos(apellidos);
+						clienteEncontrado.setDireccion(direccion);
+						clienteEncontrado.setTelefono(telefono);
+						clienteEncontrado.setDni(dni);
+
+						break;
+					case 2:
+						cliente = Cliente.consultarCliente(codigoCliente);
 						break;
 					case 3:
-						cliente = Cliente.consultarCliente();
+//						cliente = Cliente.consultarCliente();
 						break;
 					case 4:
-						cliente = Cliente.eliminarCliente();
+//						cliente = Cliente.eliminarCliente();
 						break;
 					case 5:
-						cliente = Cliente.listarCliente();
+//						cliente = Cliente.listarCliente();
 						break;
 				}
 				
