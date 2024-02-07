@@ -3,7 +3,11 @@ package frames;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+
+import clases.Cliente;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -11,6 +15,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ClientesFrame extends JFrame {
 
@@ -22,6 +28,9 @@ public class ClientesFrame extends JFrame {
 	private JTextField tf_dni;
 	private JTextField tf_telefono;
 	private JTextField tf_codigoCliente;
+
+	
+	private JTextArea ta_resultados;
 
 	/**
 	 * Create the frame.
@@ -95,6 +104,10 @@ public class ClientesFrame extends JFrame {
 		lblCodigo.setBounds(581, 31, 133, 13);
 		contentPane.add(lblCodigo);
 		
+		ta_resultados = new JTextArea();
+		ta_resultados.setBounds(10, 240, 1037, 377);
+		contentPane.add(ta_resultados);
+		
 		tf_codigoCliente = new JTextField();
 		tf_codigoCliente.setEditable(false);
 		tf_codigoCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -108,11 +121,60 @@ public class ClientesFrame extends JFrame {
 		contentPane.add(cb_opciones);
 		
 		JButton btn_ok = new JButton("OK");
+		btn_ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Recoger los valores ingresados por el usuario
+				String nombres = tf_nombres.getText();
+				String apellidos = tf_apellidos.getText();
+				String direccion = tf_direccion.getText();
+				String telefono = tf_telefono.getText();
+				String dni = tf_dni.getText();
+				
+				// Recoger la accion a realizar
+				int accionARealizar = cb_opciones.getSelectedIndex();
+				
+				// Elegir la accion a realizar
+				
+				Cliente cliente = null;
+				
+				switch (accionARealizar) {
+					case 0:
+						cliente = new Cliente(nombres, apellidos, direccion, telefono, dni);
+						break;
+					case 1:
+						cliente = Cliente.modificarCliente();
+						break;
+					case 3:
+						cliente = Cliente.consultarCliente();
+						break;
+					case 4:
+						cliente = Cliente.eliminarCliente();
+						break;
+					case 5:
+						cliente = Cliente.listarCliente();
+						break;
+				}
+				
+				// Mostrar el codigo de cliente, del nuevo cliente
+				tf_codigoCliente.setText(cliente.getCodigoCliente() + "");
+				
+				// Mostrar los resultados
+				mostrarResultados(cliente);
+			}
+		});
 		btn_ok.setBounds(437, 195, 85, 21);
 		contentPane.add(btn_ok);
-		
-		JTextArea ta_resultados = new JTextArea();
-		ta_resultados.setBounds(10, 240, 1037, 377);
-		contentPane.add(ta_resultados);
+	}
+	
+	// Metodos
+	public void mostrarResultados(Cliente cliente) {
+		String mensaje = "DATOS DEL CLIENTE\n";
+			mensaje += "\nnombres: " + cliente.getNombres();	
+			mensaje += "\napellidos: " + cliente.getApellidos();
+			mensaje += "\ndireccion: " + cliente.getDireccion();
+			mensaje += "\ntelefono: " + cliente.getTelefono();
+			mensaje += "\ndni: " + cliente.getDni();
+			
+			ta_resultados.setText(mensaje);
 	}
 }

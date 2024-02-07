@@ -17,6 +17,7 @@ public class Cliente {
 	// Constantes de clase
 	private static final int CODIGO_CORRELATIVO_A_PARTIR;
 	
+	
 	// Bloque de inicializacion static
 	static {
 		cantidadClientes = 0;
@@ -100,6 +101,21 @@ public class Cliente {
 	}
 	
 	// Metodos
+	public static Cliente modificarCliente() {
+		
+	}
+	
+	public static Cliente consultarCliente() {
+		
+	}
+	
+	public static Cliente eliminarCliente() {
+		
+	}
+	
+	public static Cliente listarCliente() {
+		
+	}
  
 	
 }
