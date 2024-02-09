@@ -1,7 +1,5 @@
 package clases;
 
-import java.util.Iterator;
-
 public class Cliente {
 	
 	// Atributos
@@ -17,8 +15,6 @@ public class Cliente {
 	
 	// Constantes de clase
 	private static final int CODIGO_CORRELATIVO_A_PARTIR;
-	
-	private static Cliente[] clientes;
 	
 	// Bloque de inicializacion static
 	static {
@@ -103,58 +99,6 @@ public class Cliente {
 	}
 	
 	
-	public static Cliente[] getClientes() {
-		return Cliente.clientes;
-	}
-
-	public static void setClientes(Cliente clientes) {
-		// TODO: cambiar e tipo de array a array de tipo lista
-		//Cliente.clientes = clientes;
-	}
-
 	// Metodos
-	public static Cliente modificarCliente(Cliente cliente) {
-		
-		Cliente clienteActualizado = null;
-		
-		for (int i = 0; i < clientes.length; i++) {
-			
-			if(clientes[i].getCodigoCliente() == cliente.getCodigoCliente()) {
-				
-				clientes[i].setNombres(cliente.getNombres());
-				clientes[i].setApellidos(cliente.getApellidos());
-				clientes[i].setDireccion(cliente.getDireccion());
-				clientes[i].setTelefono(cliente.getTelefono());
-				clientes[i].setDni(cliente.getDni());
-				
-				clienteActualizado = clientes[i];
-			}
-		}
-		
-		return clienteActualizado;
-	}
-	
-	public static Cliente consultarCliente(int codigoCliente) {
-		Cliente clienteEncontrado = null;
-		
-		for (int i = 0; i < clientes.length; i++) {
-			
-			if(clientes[i].getCodigoCliente() == codigoCliente) {
-				
-				clienteEncontrado = clientes[i];
-			}
-		}
-		
-		return clienteEncontrado;
-	}
-	
-	public static void eliminarCliente() {
-		
-	}
-	
-	public static void listarCliente() {
-		
-	}
- 
 	
 }

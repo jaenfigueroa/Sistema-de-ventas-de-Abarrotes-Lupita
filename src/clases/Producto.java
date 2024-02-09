@@ -23,13 +23,7 @@ public class Producto {
 		CODIGO_CORRELATIVO_A_PARTIR = 2001;
 	}
 	
-	// COntructores
-
-
-	// Getters y Setters
-	public int getCodigoProducto() {
-		return this.codigoProducto;
-	}
+	// Contructores
 
 	public Producto(String nombre, double precio, int stockActual, int stockMinimo, int stockMaximo) {
 		this.codigoProducto =  Producto.CODIGO_CORRELATIVO_A_PARTIR + Producto.cantidadProductos;
@@ -41,6 +35,11 @@ public class Producto {
 		this.stockMaximo = stockMaximo;
 		
 		Producto.cantidadProductos++;
+	}
+	
+	// Getters y Setters
+	public int getCodigoProducto() {
+		return this.codigoProducto;
 	}
 
 	public void setCodigoProducto(int codigoProducto) {

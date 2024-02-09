@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import clases.Cliente;
+import managers.ClienteManager;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -29,12 +30,7 @@ public class ClientesFrame extends JFrame {
 	private JTextField tf_direccion;
 	private JTextField tf_dni;
 	private JTextField tf_telefono;
-	private JTextField tf_codigoCliente;
-	
-	///////////////////////////////
-//	private JTable table;
-//	DefaultTableModel model = new DefaultTableModel();
-	
+	private JTextField tf_codigoCliente;	
 	private JTextArea ta_resultados;
 
 	/**
@@ -86,28 +82,6 @@ public class ClientesFrame extends JFrame {
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel_1_1.setBounds(10, 197, 96, 13);
 		contentPane.add(lblNewLabel_1_1);
-		
-		/////////////////////////////
-//	    model.addColumn("Nombres");
-//	    model.addColumn("Apellidos");
-//	    model.addColumn("Dirección");
-//	    model.addColumn("Telefono");
-//	    model.addColumn("DNI");
-//	    
-//	    
-//		table = new JTable(model);
-//		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		//scrollPane_1.setViewportView(table);
-		
-		
-//        TableColumn columnaMarca = table.getColumnModel().getColumn(1);
-//        TableColumn columnaCantidad = table.getColumnModel().getColumn(1);
-//        TableColumn columnaImporte = table.getColumnModel().getColumn(0);
-//
-//        columnaMarca.setPreferredWidth(200);
-//        columnaCantidad.setPreferredWidth(50);   
-//        columnaImporte.setPreferredWidth(150);
-        /////////////////////////////
 		
 		tf_dni = new JTextField();
 		tf_dni.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -175,40 +149,46 @@ public class ClientesFrame extends JFrame {
 				Cliente cliente = null;
 				
 				switch (accionARealizar) {
+					// CREAR
 					case 0:
 						cliente = new Cliente(nombres, apellidos, direccion, telefono, dni);
-						Cliente.setClientes(cliente);
-						break;
-					case 1:
 						
-						Cliente clienteEncontrado = Cliente.consultarCliente(codigoCliente);
+						ClienteManager.agregarCliente(cliente);
 						
-						clienteEncontrado.setNombres(nombres);
-						clienteEncontrado.setApellidos(apellidos);
-						clienteEncontrado.setDireccion(direccion);
-						clienteEncontrado.setTelefono(telefono);
-						clienteEncontrado.setDni(dni);
+						// Mostrar el codigo de cliente recién creado
+						tf_codigoCliente.setText(cliente.getCodigoCliente() + "");
 
+						mostrarDatosCliente(cliente);
 						break;
+					
+					// MODIFICAR
+					case 1:
+						cliente = new Cliente(nombres, apellidos, direccion, telefono, dni);
+
+						Cliente clienteModificado = ClienteManager.modificarCliente(cliente);
+						
+						mostrarDatosCliente(clienteModificado);
+						break;
+						
+					// CONSULTAR
 					case 2:
-						cliente = Cliente.consultarCliente(codigoCliente);
+						Cliente clienteEncontrado = ClienteManager.consultarCliente(codigoCliente);
+
+						mostrarDatosCliente(clienteEncontrado);
 						break;
+						
+					// ELIMINAR
 					case 3:
-//						cliente = Cliente.consultarCliente();
+						Cliente clienteEliminado = ClienteManager.eliminarCliente(codigoCliente);
+						mostrarDatosCliente(clienteEliminado);
 						break;
+						
+					// LISTAR
 					case 4:
-//						cliente = Cliente.eliminarCliente();
-						break;
-					case 5:
-//						cliente = Cliente.listarCliente();
+						ClienteManager.listarClientes();
 						break;
 				}
 				
-				// Mostrar el codigo de cliente, del nuevo cliente
-				tf_codigoCliente.setText(cliente.getCodigoCliente() + "");
-				
-				// Mostrar los resultados
-				mostrarResultados(cliente);
 			}
 		});
 		btn_ok.setBounds(437, 195, 85, 21);
@@ -216,13 +196,16 @@ public class ClientesFrame extends JFrame {
 	}
 	
 	// Metodos
-	public void mostrarResultados(Cliente cliente) {
+	public void mostrarDatosCliente(Cliente cliente) {
 		String mensaje = "DATOS DEL CLIENTE\n";
-			mensaje += "\nnombres: " + cliente.getNombres();	
-			mensaje += "\napellidos: " + cliente.getApellidos();
-			mensaje += "\ndireccion: " + cliente.getDireccion();
-			mensaje += "\ntelefono: " + cliente.getTelefono();
-			mensaje += "\ndni: " + cliente.getDni();
+			mensaje += "\nCodigo del cliente: " + cliente.getCodigoCliente();
+			mensaje += "\nNombres: " + cliente.getNombres();	
+			mensaje += "\nApellidos: " + cliente.getApellidos();
+			mensaje += "\nDireccion: " + cliente.getDireccion();
+			mensaje += "\nTelefono: " + cliente.getTelefono();
+			mensaje += "\nDNI: " + cliente.getDni();
+			
+			mensaje += "\n\nCantidad de cliente: " + Cliente.getCantidadClientes();
 			
 			ta_resultados.setText(mensaje);
 	}

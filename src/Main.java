@@ -1,14 +1,8 @@
 import clases.Cliente;
 import frames.DashboardFrame;
 
-public class Main {
-	
-	// 
-	public static Cliente[] clientes;
-	
-	
-	
-	
+public class Main {	
+
 	// Lanzar la aplicación
 	public static void main(String[] args) {
 	    try {
