@@ -1,5 +1,7 @@
 package clases;
 
+import managers.ClienteManager;
+import managers.ProductoManager;
 import utilidades.Utilidades;
 
 
@@ -12,6 +14,12 @@ public class Venta {
 	private int cantidad;
 	private double precio;
 	private String fecha; // Formato: mm/dd/aaaa
+	
+	private final double IMPORTE_IGV = 1.18; // 18%
+	
+	private double importeSubtotal;
+	private double impuestoPagar;
+	private double importeTotalPagar;
 	
 	// Variables de clase
 	private static int cantidadVentas;
@@ -37,6 +45,11 @@ public class Venta {
 		this.fecha = Utilidades.obtenerFechaActualFormateadoMDA();
 		
 		Venta.cantidadVentas++;
+		
+		// calcular
+		this.importeSubtotal = cantidad * precio;
+		this.impuestoPagar = this.IMPORTE_IGV * importeSubtotal;
+		this.importeTotalPagar = importeSubtotal + impuestoPagar;
 	}
 
 	// Getters y setters
@@ -88,6 +101,35 @@ public class Venta {
 		this.fecha = fecha;
 	}
 	
+	
+	public double getImporteSubtotal() {
+		return this.importeSubtotal;
+	}
+
+	public void setImporteSubtotal(double importeSubtotal) {
+		this.importeSubtotal = importeSubtotal;
+	}
+
+	public double getImpuestoPagar() {
+		return this.impuestoPagar;
+	}
+
+	public void setImpuestoPagar(double impuestoPagar) {
+		this.impuestoPagar = impuestoPagar;
+	}
+
+	public double getImporteTotalPagar() {
+		return this.importeTotalPagar;
+	}
+
+	public void setImporteTotalPagar(double importeTotalPagar) {
+		this.importeTotalPagar = importeTotalPagar;
+	}
+	
+	public double getIMPORTE_IGV() {
+		return IMPORTE_IGV;
+	}
+
 	// Getters y Setters para variables de clase
 	public static int getCantidadVentas() {
 		return Venta.cantidadVentas;
@@ -103,7 +145,30 @@ public class Venta {
 	}
 	
 	// Metodos
+	public boolean comprobarStockActual(int cantidadUnidadesComprar) {
+		
+		Producto productoParaComprar = ProductoManager.getProductos().get(this.codigoProducto);
+		
+		return cantidadUnidadesComprar < productoParaComprar.getStockActual();
+	}
 	
-	
+	public String obtenerBoleta() {
+		String boleta = "BOLETA DE PAGO\n";
+		
+		Cliente cliente = ClienteManager.consultarCliente(this.codigoCliente);
+		Producto producto = ProductoManager.consultarProducto(this.codigoProducto);
+		
+		boleta += "Código del cliente: " + this.codigoCliente;
+		boleta += "Nombres y apellidos del cliente: " + cliente.getNombres();
+		boleta += "Código del producto: " + this.codigoProducto;
+		boleta += "Nombre del producto : " + producto.getNombre();
+		boleta += "Cantidad de unidades adquiridas: " + this.cantidad;
+		boleta += "Precio unitario: " + this.precio;
+		boleta += "Importe subtotal: " + this.importeSubtotal;
+		boleta += "Importe del IGV: " + this.impuestoPagar ;
+		boleta += "Importe total a pagar: " + this.importeTotalPagar ;
+		
+		return boleta;
+	}
 	
 }

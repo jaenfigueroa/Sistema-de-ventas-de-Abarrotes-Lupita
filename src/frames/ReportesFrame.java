@@ -10,11 +10,16 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class ReportesFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTable table;
+	private JTable table_1;
 
 	/**
 	 * Create the frame.
@@ -41,9 +46,52 @@ public class ReportesFrame extends JFrame {
 		btn_generarReporte.setBounds(871, 31, 147, 21);
 		contentPane.add(btn_generarReporte);
 		
-		JTextArea ta_resultados = new JTextArea();
-		ta_resultados.setBounds(10, 80, 1058, 537);
-		contentPane.add(ta_resultados);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 90, 1025, 170);
+		contentPane.add(scrollPane_1);
+		
+		table = new JTable();
+		scrollPane_1.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"Codigo de venta", "Codigo cliente", "Codigo producto", "cantidad", "precio", "fecha"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, Integer.class, Integer.class, Integer.class, Double.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		table.getColumnModel().getColumn(0).setPreferredWidth(99);
+		table.getColumnModel().getColumn(1).setPreferredWidth(95);
+		table.getColumnModel().getColumn(2).setPreferredWidth(95);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 343, 1025, 237);
+		contentPane.add(scrollPane);
+		
+		table_1 = new JTable();
+		scrollPane.setViewportView(table_1);
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"Codigo", "Nombre", "Precio", "Stock minimo", "Stock actual", "Stock maximo"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, Double.class, Integer.class, Integer.class, Integer.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
 	}
 	
 	// Metodos

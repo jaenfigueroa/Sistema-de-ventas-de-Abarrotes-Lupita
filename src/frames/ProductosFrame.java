@@ -11,6 +11,9 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 public class ProductosFrame extends JFrame {
 
@@ -22,6 +25,7 @@ public class ProductosFrame extends JFrame {
 	private JTextField tf_stockMaximo;
 	private JTextField tf_stockMinimo;
 	private JTextField tf_codigoProducto;
+	private JTable table;
 
 	/**
 	 * Create the frame.
@@ -111,8 +115,28 @@ public class ProductosFrame extends JFrame {
 		btn_ok.setBounds(437, 195, 85, 21);
 		contentPane.add(btn_ok);
 		
-		JTextArea ta_resultados = new JTextArea();
-		ta_resultados.setBounds(10, 240, 1037, 377);
-		contentPane.add(ta_resultados);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 258, 964, 344);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"Codigo", "Nombre", "Precio", "Stock actual", "Stock minimo", "Stock maximo"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, Double.class, Integer.class, Integer.class, Integer.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		scrollPane.setViewportView(table);
 	}
 }

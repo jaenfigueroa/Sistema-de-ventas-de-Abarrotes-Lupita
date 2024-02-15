@@ -10,6 +10,9 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class VentasFrame extends JFrame {
 
@@ -53,17 +56,12 @@ public class VentasFrame extends JFrame {
 		lblNewLabel_1.setBounds(10, 74, 105, 25);
 		contentPane.add(lblNewLabel_1);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(10, 145, 1047, 457);
-		contentPane.add(textArea);
-		
 		JButton btnNewButton = new JButton("Vender");
 		btnNewButton.setBounds(947, 29, 85, 21);
 		contentPane.add(btnNewButton);
+		
+		JTextArea ta_resultados = new JTextArea();
+		ta_resultados.setBounds(10, 129, 1022, 469);
+		contentPane.add(ta_resultados);
 	}
-	
-	// Metodos
-	
-	
-
 }

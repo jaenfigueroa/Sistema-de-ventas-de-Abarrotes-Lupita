@@ -14,26 +14,31 @@ public class VentaManager {
 	}
 
 	// Getters y Setters para las variables de clase
-	public static ArrayList<Venta> getVentas() {
-		return VentaManager.ventas;
-	}
-
-	public static void setVentas(ArrayList<Venta> ventas) {
-		VentaManager.ventas = ventas;
-	}
+//	public static ArrayList<Venta> getVentas() {
+//		return VentaManager.ventas;
+//	}
+//
+//	public static void setVentas(ArrayList<Venta> ventas) {
+//		VentaManager.ventas = ventas;
+//	}
 	
 	// Metodos
-	public static Venta getVenta(int codigoVentaBuscado) {
-		
-		Venta ventaEncontrada = null;
-
-        for (Venta cliente : VentaManager.ventas) {
-            if (cliente.getCodigoCliente() == codigoVentaBuscado) {
-            	ventaEncontrada = cliente;
-                break;
-            }
-        }
-        
-        return ventaEncontrada;
-	}
+//	public static Venta getVenta(int codigoVentaBuscado) {
+//		
+//		Venta ventaEncontrada = null;
+//
+//        for (Venta cliente : VentaManager.ventas) {
+//            if (cliente.getCodigoCliente() == codigoVentaBuscado) {
+//            	ventaEncontrada = cliente;
+//                break;
+//            }
+//        }
+//        
+//        return ventaEncontrada;
+//	}
+	
+	
+	// metodo que se va encargar de realizar la venta
+	
+	
 }

@@ -8,6 +8,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class AlmacenFrame extends JFrame {
 
@@ -15,6 +18,7 @@ public class AlmacenFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTable table;
 
 	/**
 	 * Create the frame.
@@ -49,6 +53,28 @@ public class AlmacenFrame extends JFrame {
 		JButton btnNewButton = new JButton("Ingresar nuevo stock");
 		btnNewButton.setBounds(852, 34, 169, 21);
 		contentPane.add(btnNewButton);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(21, 137, 1019, 467);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"Codigo", "Nombre", "Precio", "Stock minimo", "Stock actual", "Stock maximo"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, Double.class, Integer.class, Integer.class, Integer.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
 	}
 
 	// Metodos

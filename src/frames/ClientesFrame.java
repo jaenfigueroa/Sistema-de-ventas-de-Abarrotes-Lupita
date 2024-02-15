@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class ClientesFrame extends JFrame {
 
@@ -31,7 +32,7 @@ public class ClientesFrame extends JFrame {
 	private JTextField tf_dni;
 	private JTextField tf_telefono;
 	private JTextField tf_codigoCliente;	
-	private JTextArea ta_resultados;
+	private JTable tb_resultados;
 
 	/**
 	 * Create the frame.
@@ -104,10 +105,6 @@ public class ClientesFrame extends JFrame {
 		lblCodigo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblCodigo.setBounds(581, 31, 133, 13);
 		contentPane.add(lblCodigo);
-		
-		ta_resultados = new JTextArea();
-		ta_resultados.setBounds(10, 240, 1037, 377);
-		contentPane.add(ta_resultados);
 		
 		tf_codigoCliente = new JTextField();
 		tf_codigoCliente.setEditable(false);
@@ -193,6 +190,32 @@ public class ClientesFrame extends JFrame {
 		});
 		btn_ok.setBounds(437, 195, 85, 21);
 		contentPane.add(btn_ok);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(27, 262, 974, 309);
+		contentPane.add(scrollPane);
+		
+		tb_resultados = new JTable();
+		scrollPane.setViewportView(tb_resultados);
+		
+		
+		tb_resultados.setModel(new DefaultTableModel(
+			new Object[][] {
+				{new Integer(11111111), "Maria", "Fernandez", "Arequipa", "9999999999", "77777777777"},
+				{new Integer(2222222), "Jose", "Perez", "Lima", "888888888", null},
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"Codigo", "Nombres", "Apellidos", "Direcci\u00F3n", "Telefono", "DNI"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
 	}
 	
 	// Metodos
@@ -207,6 +230,6 @@ public class ClientesFrame extends JFrame {
 			
 			mensaje += "\n\nCantidad de cliente: " + Cliente.getCantidadClientes();
 			
-			ta_resultados.setText(mensaje);
+			//ta_resultados.setText(mensaje);
 	}
 }

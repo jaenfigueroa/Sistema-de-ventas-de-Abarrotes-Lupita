@@ -18,12 +18,14 @@ public class ClienteManager {
 	public static Cliente agregarCliente(Cliente cliente) {
 		ClienteManager.clientes.add(cliente);
 		
+		// devolver el usuario recién agregado
 		return ClienteManager.clientes.get(cliente.getCodigoCliente());
 	}
 	
 	public static Cliente modificarCliente(Cliente clienteConCambios) {
 		
 		for (int i = 0; i < ClienteManager.clientes.size(); i++) {
+
             if (ClienteManager.clientes.get(i).getCodigoCliente() == clienteConCambios.getCodigoCliente()) {
             	
             	ClienteManager.clientes.set(i, clienteConCambios);
@@ -32,6 +34,7 @@ public class ClienteManager {
             }
 		}
 		
+		// devolver el usuario actualizado
 		return ClienteManager.clientes.get(clienteConCambios.getCodigoCliente());
 	}
 	
@@ -46,6 +49,7 @@ public class ClienteManager {
             }
         }
         
+     // devolver el usuario actualizado
         return clienteEncontrado;
 	}
 	
@@ -64,6 +68,7 @@ public class ClienteManager {
             }
 		}
 		
+		// devolver el usuario actualizado
 		return clienteEliminado;
 	}
 
