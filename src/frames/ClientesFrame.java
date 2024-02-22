@@ -19,6 +19,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
@@ -32,7 +33,7 @@ public class ClientesFrame extends JFrame {
 	private JTextField tf_dni;
 	private JTextField tf_telefono;
 	private JTextField tf_codigoCliente;	
-	private JTable tb_resultados;
+	private JTextArea ta_resultados;
 
 	/**
 	 * Create the frame.
@@ -107,6 +108,7 @@ public class ClientesFrame extends JFrame {
 		contentPane.add(lblCodigo);
 		
 		tf_codigoCliente = new JTextField();
+		tf_codigoCliente.setText("0");
 		tf_codigoCliente.setEditable(false);
 		tf_codigoCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_codigoCliente.setColumns(10);
@@ -136,53 +138,71 @@ public class ClientesFrame extends JFrame {
 				String direccion = tf_direccion.getText();
 				String telefono = tf_telefono.getText();
 				String dni = tf_dni.getText();
-				int codigoCliente = Integer.parseInt(tf_codigoCliente.getText());
 				
 				// Recoger la accion a realizar
 				int accionARealizar = cb_opciones.getSelectedIndex();
 				
+				System.out.println(accionARealizar);
+				System.out.println(nombres);
+				System.out.println(apellidos);
+				System.out.println(direccion);
+				System.out.println(nombres);
+				System.out.println(telefono);
+				System.out.println(dni);
+				
 				// Elegir la accion a realizar
+				
+//				
 				
 				Cliente cliente = null;
 				
+				int codigoCliente = Integer.parseInt(tf_codigoCliente.getText());
+				
 				switch (accionARealizar) {
+					
 					// CREAR
 					case 0:
 						cliente = new Cliente(nombres, apellidos, direccion, telefono, dni);
-						
 						ClienteManager.agregarCliente(cliente);
 						
 						// Mostrar el codigo de cliente recién creado
 						tf_codigoCliente.setText(cliente.getCodigoCliente() + "");
 
+						limpiar();
 						mostrarDatosCliente(cliente);
 						break;
 					
 					// MODIFICAR
 					case 1:
-						cliente = new Cliente(nombres, apellidos, direccion, telefono, dni);
-
-						Cliente clienteModificado = ClienteManager.modificarCliente(cliente);
-						
+						Cliente clienteModificado = ClienteManager.modificarCliente(codigoCliente, nombres, apellidos, direccion, telefono, dni);
+						limpiar();
 						mostrarDatosCliente(clienteModificado);
 						break;
 						
 					// CONSULTAR
 					case 2:
 						Cliente clienteEncontrado = ClienteManager.consultarCliente(codigoCliente);
-
+						limpiar();
 						mostrarDatosCliente(clienteEncontrado);
 						break;
 						
 					// ELIMINAR
 					case 3:
-						Cliente clienteEliminado = ClienteManager.eliminarCliente(codigoCliente);
-						mostrarDatosCliente(clienteEliminado);
+						ClienteManager.eliminarCliente(codigoCliente);
+						limpiar();
+						ta_resultados.setText("Cliente eliminado");
 						break;
 						
 					// LISTAR
 					case 4:
-						ClienteManager.listarClientes();
+						ArrayList<Cliente> clientesEncontrados = ClienteManager.listarClientes();
+
+						limpiar();
+						for (int i = 0; i < clientesEncontrados.size(); i++) {
+							mostrarDatosCliente(clientesEncontrados.get(i));
+							ta_resultados.append("\n----------------------------------------------\n");
+						}
+						
 						break;
 				}
 				
@@ -192,44 +212,31 @@ public class ClientesFrame extends JFrame {
 		contentPane.add(btn_ok);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(27, 262, 974, 309);
+		scrollPane.setBounds(10, 230, 1016, 371);
 		contentPane.add(scrollPane);
 		
-		tb_resultados = new JTable();
-		scrollPane.setViewportView(tb_resultados);
-		
-		
-		tb_resultados.setModel(new DefaultTableModel(
-			new Object[][] {
-				{new Integer(11111111), "Maria", "Fernandez", "Arequipa", "9999999999", "77777777777"},
-				{new Integer(2222222), "Jose", "Perez", "Lima", "888888888", null},
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"Codigo", "Nombres", "Apellidos", "Direcci\u00F3n", "Telefono", "DNI"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, String.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		ta_resultados = new JTextArea();
+		scrollPane.setViewportView(ta_resultados);
 	}
 	
 	// Metodos
 	public void mostrarDatosCliente(Cliente cliente) {
-		String mensaje = "DATOS DEL CLIENTE\n";
-			mensaje += "\nCodigo del cliente: " + cliente.getCodigoCliente();
+		
+		if(cliente != null) {
+			String mensaje = "Codigo del cliente: " + cliente.getCodigoCliente();
 			mensaje += "\nNombres: " + cliente.getNombres();	
 			mensaje += "\nApellidos: " + cliente.getApellidos();
 			mensaje += "\nDireccion: " + cliente.getDireccion();
 			mensaje += "\nTelefono: " + cliente.getTelefono();
 			mensaje += "\nDNI: " + cliente.getDni();
 			
-			mensaje += "\n\nCantidad de cliente: " + Cliente.getCantidadClientes();
-			
-			//ta_resultados.setText(mensaje);
+			ta_resultados.append(mensaje);
+		} else {
+			ta_resultados.append("no existe");
+		}
+	}
+
+	public void limpiar() {
+		ta_resultados.setText("");
 	}
 }

@@ -17,25 +17,26 @@ public class ClienteManager {
 	// Metodos
 	public static Cliente agregarCliente(Cliente cliente) {
 		ClienteManager.clientes.add(cliente);
-		
-		// devolver el usuario recién agregado
-		return ClienteManager.clientes.get(cliente.getCodigoCliente());
+		return cliente;
 	}
 	
-	public static Cliente modificarCliente(Cliente clienteConCambios) {
+	public static Cliente modificarCliente(int codigoCliente, String nombres, String apellidos, String direccion, String telefono, String dni) {
 		
 		for (int i = 0; i < ClienteManager.clientes.size(); i++) {
 
-            if (ClienteManager.clientes.get(i).getCodigoCliente() == clienteConCambios.getCodigoCliente()) {
+            if (ClienteManager.clientes.get(i).getCodigoCliente() == codigoCliente) {
             	
-            	ClienteManager.clientes.set(i, clienteConCambios);
-
-                break;
+            	Cliente clienteEncontrado = ClienteManager.clientes.get(i);
+            	clienteEncontrado.setNombres(nombres);
+            	clienteEncontrado.setApellidos(apellidos);
+            	clienteEncontrado.setDireccion(direccion);
+            	clienteEncontrado.setTelefono(telefono);
+            	clienteEncontrado.setDni(dni);
+            	
+            	return clienteEncontrado;
             }
 		}
-		
-		// devolver el usuario actualizado
-		return ClienteManager.clientes.get(clienteConCambios.getCodigoCliente());
+		return null;
 	}
 	
 	public static Cliente consultarCliente(int codigoClienteBuscado) {
@@ -54,14 +55,14 @@ public class ClienteManager {
 	}
 	
 
-	public static Cliente eliminarCliente(int codigoClienteAEliminar) {
+	public static void eliminarCliente(int codigoClienteAEliminar) {
 		
-		Cliente clienteEliminado = null;
+		//Cliente clienteEliminado = null;
 		
 		for (int i = 0; i < ClienteManager.clientes.size(); i++) {
             if (ClienteManager.clientes.get(i).getCodigoCliente() == codigoClienteAEliminar) {
             	
-            	clienteEliminado = ClienteManager.clientes.get(codigoClienteAEliminar);
+            	//clienteEliminado = ClienteManager.clientes.get(codigoClienteAEliminar);
             	
             	ClienteManager.clientes.remove(i);
                 break;
@@ -69,11 +70,17 @@ public class ClienteManager {
 		}
 		
 		// devolver el usuario actualizado
-		return clienteEliminado;
+		//return clienteEliminado;
 	}
 
 	public static ArrayList<Cliente> listarClientes() {
 		return ClienteManager.clientes;
 	}
+	
+	// Metodos auxiliares
+	
+//	public static int buscarIndice() {
+//		
+//	}
 
 }
