@@ -28,25 +28,30 @@ public class ProductoManager {
 	public static Producto agregarProducto(Producto productoNuevo) {
 		ProductoManager.productos.add(productoNuevo);
 		
-		// devolver el producto recién agregado
-		return ProductoManager.productos.get(productoNuevo.getCodigoProducto());
+		return productoNuevo;
 	}
 	
-	public static Producto modificarProducto(Producto productoConCambios) {
+public static Producto modificarProducto(int codigoProducto, String nombres, double precio, int stockActual, int stockMinimo, int stockMaximo) {
 		
 		for (int i = 0; i < ProductoManager.productos.size(); i++) {
 
-            if (ProductoManager.productos.get(i).getCodigoProducto() == productoConCambios.getCodigoProducto()) {
+            if (ProductoManager.productos.get(i).getCodigoProducto() == codigoProducto) {
             	
-            	ProductoManager.productos.set(i, productoConCambios);
-
-                break;
+            	Producto productoEncontrado = ProductoManager.productos.get(i);
+            	productoEncontrado.setNombre(nombres);
+            	productoEncontrado.setPrecio(precio);
+            	productoEncontrado.setStockActual(stockActual);
+            	productoEncontrado.setStockMinimo(stockMinimo);
+            	productoEncontrado.setStockMaximo(stockMaximo);
+            	
+            	return productoEncontrado;
             }
 		}
+		return null;
+	
 		
-		// devolver el usuario actualizado
-		return ProductoManager.productos.get(productoConCambios.getCodigoProducto());
-	}
+}
+		
 	
 	public static Producto consultarProducto(int codigoProductoBuscado) {
 		
@@ -63,22 +68,22 @@ public class ProductoManager {
         return productoEncontrado;
 	}
 	
-	public static Producto eliminarProducto(int codigoProductoAEliminar) {
+public static void eliminarProducto(int codigoProductoAEliminar) {
 		
-		Producto productoEliminado = null;
+		//Cliente productoEliminado = null;
 		
 		for (int i = 0; i < ProductoManager.productos.size(); i++) {
             if (ProductoManager.productos.get(i).getCodigoProducto() == codigoProductoAEliminar) {
             	
-            	productoEliminado = ProductoManager.productos.get(codigoProductoAEliminar);
+            	//clienteEliminado = ClienteManager.clientes.get(codigoClienteAEliminar);
             	
             	ProductoManager.productos.remove(i);
                 break;
             }
 		}
 		
-		// devolver el producto actualizado
-		return productoEliminado;
+		// devolver el usuario actualizado
+		//return clienteEliminado;
 	}
 
 	public static ArrayList<Producto> listarProductos() {
