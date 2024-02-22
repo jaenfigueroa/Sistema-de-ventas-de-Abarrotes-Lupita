@@ -10,15 +10,23 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import clases.Producto;
+import managers.ProductoManager;
+
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class AlmacenFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
 	private JTable table;
+	private JSpinner sp_codigoProducto;
+	private JSpinner sp_cantidadUnidades;
 
 	/**
 	 * Create the frame.
@@ -32,11 +40,6 @@ public class AlmacenFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(141, 35, 96, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
 		JLabel lblNewLabel = new JLabel("Codigo del producto");
 		lblNewLabel.setBounds(10, 38, 124, 13);
 		contentPane.add(lblNewLabel);
@@ -45,14 +48,17 @@ public class AlmacenFrame extends JFrame {
 		lblCantidadDeUnidades.setBounds(10, 80, 124, 13);
 		contentPane.add(lblCantidadDeUnidades);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(141, 77, 96, 19);
-		contentPane.add(textField_1);
-		
-		JButton btnNewButton = new JButton("Ingresar nuevo stock");
-		btnNewButton.setBounds(852, 34, 169, 21);
-		contentPane.add(btnNewButton);
+		JButton btn_agregarStock = new JButton("Ingresar nuevo stock");
+		btn_agregarStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int codigoProducto = (int) sp_codigoProducto.getValue();
+				int cantidadUnidades = (int) sp_cantidadUnidades.getValue();
+				
+				ingresarNuevoStock(codigoProducto,cantidadUnidades );
+			}
+		});
+		btn_agregarStock.setBounds(852, 34, 169, 21);
+		contentPane.add(btn_agregarStock);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(21, 137, 1019, 467);
@@ -75,9 +81,29 @@ public class AlmacenFrame extends JFrame {
 				return columnTypes[columnIndex];
 			}
 		});
+		
+		sp_codigoProducto = new JSpinner();
+		sp_codigoProducto.setModel(new SpinnerNumberModel(Integer.valueOf(0), null, null, Integer.valueOf(1)));
+		sp_codigoProducto.setBounds(142, 35, 124, 20);
+		contentPane.add(sp_codigoProducto);
+		
+		sp_cantidadUnidades = new JSpinner();
+		sp_cantidadUnidades.setBounds(144, 77, 124, 20);
+		contentPane.add(sp_cantidadUnidades);
 	}
 
 	// Metodos
-	
-	
+	public void ingresarNuevoStock(int codigoProducto, int cantidadUnidades) {
+		Producto producto = ProductoManager.consultarProducto(codigoProducto);
+		
+		int stockNuevo = producto.getStockActual() + cantidadUnidades;
+		boolean comprobacion = stockNuevo <= producto.getStockMaximo();
+		
+		if(comprobacion) {
+			producto.setStockActual(stockNuevo);
+		} 
+		else {
+			producto.setStockActual(producto.getStockMaximo());
+		}
+	}
 }

@@ -101,7 +101,7 @@ public class Producto {
 	}	
 	
 	// Metodos
-	
+	//public void actualizarStockAc
 	
 	
 }
