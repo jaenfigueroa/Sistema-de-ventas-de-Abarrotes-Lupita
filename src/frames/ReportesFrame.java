@@ -36,9 +36,11 @@ public class ReportesFrame extends JFrame {
 	 */
 	public ReportesFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 850, 510);
+		setBounds(100, 100, 646, 510);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -48,11 +50,11 @@ public class ReportesFrame extends JFrame {
 				"Listado de productos cuyo stock se encuentra por debajo del stock mínimo",
 				"Listado de productos por unidades vendidas acumuladas",
 				"Listado de productos por importe total acumulado" }));
-		cb_tipoReporte.setBounds(104, 10, 723, 21);
+		cb_tipoReporte.setBounds(116, 10, 505, 21);
 		contentPane.add(cb_tipoReporte);
 
 		JLabel lblNewLabel = new JLabel("Tipo de reporte");
-		lblNewLabel.setBounds(10, 10, 117, 21);
+		lblNewLabel.setBounds(10, 10, 104, 21);
 		contentPane.add(lblNewLabel);
 
 		JButton btn_generarReporte = new JButton("Generar reporte");
@@ -121,11 +123,11 @@ public class ReportesFrame extends JFrame {
 				ta_salida.setText(reporte);
 			}
 		});
-		btn_generarReporte.setBounds(680, 39, 147, 21);
+		btn_generarReporte.setBounds(475, 39, 147, 21);
 		contentPane.add(btn_generarReporte);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 70, 817, 381);
+		scrollPane.setBounds(10, 70, 611, 381);
 		contentPane.add(scrollPane);
 		
 		ta_salida = new JTextArea();

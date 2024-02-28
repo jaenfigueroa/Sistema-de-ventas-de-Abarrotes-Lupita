@@ -17,6 +17,14 @@ public class VentaManager {
 		agregarVenta(1002, 2002, 10);
 		agregarVenta(1003, 2003, 5);
 		agregarVenta(1004, 2004, 10);
+		agregarVenta(1001, 2001, 5);
+		agregarVenta(1002, 2002, 10);
+		agregarVenta(1003, 2001, 5);
+		agregarVenta(1004, 2004, 10);
+		agregarVenta(1001, 2004, 5);
+		agregarVenta(1002, 2003, 10);
+		agregarVenta(1003, 2001, 5);
+		agregarVenta(1004, 2001, 10);
 	}
 
 	// Getters y Setters para las variables de clase

@@ -10,6 +10,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.border.EtchedBorder;
 
 public class DashboardFrame extends JFrame {
 
@@ -21,81 +26,74 @@ public class DashboardFrame extends JFrame {
 	 */
 	public DashboardFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1092, 664);
+		setBounds(100, 100, 583, 160);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		
-		JMenu mnNewMenu = new JMenu("Mantenimiento");
-		menuBar.add(mnNewMenu);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Clientes");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ClientesFrame frame = new ClientesFrame();
-		        frame.setVisible(true);
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Productos");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ProductosFrame frame = new ProductosFrame();
-		        frame.setVisible(true);
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem_2);
-		
-		JMenu mnNewMenu_1 = new JMenu("Ventas");
-		menuBar.add(mnNewMenu_1);
-		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Abrir");
-		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+		JButton btnNewButton_1 = new JButton("Ventas");
+		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VentasFrame frame = new VentasFrame();
 		        frame.setVisible(true);
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_3);
+		btnNewButton_1.setBounds(172, 48, 113, 21);
+		contentPane.add(btnNewButton_1);
 		
-		JMenu mnNewMenu_1_1 = new JMenu("Almacen");
-		menuBar.add(mnNewMenu_1_1);
-		
-		JMenuItem mntmNewMenuItem_1_1 = new JMenuItem("Abrir");
-		mntmNewMenuItem_1_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_1_1 = new JButton("Almacenamiento");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AlmacenFrame frame = new AlmacenFrame();
 		        frame.setVisible(true);
 			}
 		});
-		mnNewMenu_1_1.add(mntmNewMenuItem_1_1);
+		btnNewButton_1_1.setBounds(295, 48, 139, 21);
+		contentPane.add(btnNewButton_1_1);
 		
-		JMenu mnNewMenu_1_1_1 = new JMenu("Reportes");
-		menuBar.add(mnNewMenu_1_1_1);
-		
-		JMenuItem mntmNewMenuItem_1_1_1 = new JMenuItem("Abrir");
-		mntmNewMenuItem_1_1_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_1_2 = new JButton("Reportes");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ReportesFrame frame = new ReportesFrame();
 		        frame.setVisible(true);
 			}
 		});
-		mnNewMenu_1_1_1.add(mntmNewMenuItem_1_1_1);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		btnNewButton_1_2.setBounds(443, 48, 113, 21);
+		contentPane.add(btnNewButton_1_2);
 		
-		JLabel lblNewLabel = new JLabel("Dashboard");
-		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblNewLabel.setBounds(10, 604, 126, 13);
-		contentPane.add(lblNewLabel);
+		JPanel panel = new JPanel();
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBounds(10, 10, 152, 101);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JButton btnClientes = new JButton("Clientes");
+		btnClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ClientesFrame frame = new ClientesFrame();
+		        frame.setVisible(true);
+			}
+		});
+		btnClientes.setBounds(10, 38, 134, 21);
+		panel.add(btnClientes);
+		
+		JButton btnNewButton_2_1 = new JButton("Productos");
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProductosFrame frame = new ProductosFrame();
+		        frame.setVisible(true);
+			}
+		});
+		btnNewButton_2_1.setBounds(10, 69, 134, 21);
+		panel.add(btnNewButton_2_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("Mantenimiento");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(10, 10, 132, 13);
+		panel.add(lblNewLabel_1);
 	}
-	
-	
-	// Metodos
-	
-	
 }

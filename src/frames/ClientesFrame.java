@@ -40,71 +40,73 @@ public class ClientesFrame extends JFrame {
 	 */
 	public ClientesFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 709, 620);
+		setBounds(100, 100, 709, 520);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Nombres");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(10, 43, 96, 13);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setBounds(10, 43, 92, 13);
 		contentPane.add(lblNewLabel);
 
 		tf_nombres = new JTextField();
 		tf_nombres.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tf_nombres.setBounds(107, 40, 289, 19);
+		tf_nombres.setBounds(107, 40, 236, 19);
 		contentPane.add(tf_nombres);
 		tf_nombres.setColumns(10);
 
 		tf_apellidos = new JTextField();
 		tf_apellidos.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_apellidos.setColumns(10);
-		tf_apellidos.setBounds(107, 66, 289, 19);
+		tf_apellidos.setBounds(107, 66, 236, 19);
 		contentPane.add(tf_apellidos);
 
 		JLabel lblApellidos = new JLabel("Apellidos");
-		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblApellidos.setBounds(10, 69, 96, 13);
+		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblApellidos.setBounds(10, 69, 92, 13);
 		contentPane.add(lblApellidos);
 
 		tf_direccion = new JTextField();
 		tf_direccion.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_direccion.setColumns(10);
-		tf_direccion.setBounds(107, 95, 289, 19);
+		tf_direccion.setBounds(107, 95, 236, 19);
 		contentPane.add(tf_direccion);
 
 		JLabel lblDireccin = new JLabel("Dirección");
-		lblDireccin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDireccin.setBounds(10, 98, 96, 13);
+		lblDireccin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDireccin.setBounds(10, 98, 92, 13);
 		contentPane.add(lblDireccin);
 
 		JLabel lblNewLabel_1_1 = new JLabel("DNI");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_1.setBounds(10, 156, 96, 13);
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_1_1.setBounds(10, 156, 92, 13);
 		contentPane.add(lblNewLabel_1_1);
 
 		tf_dni = new JTextField();
 		tf_dni.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_dni.setColumns(10);
-		tf_dni.setBounds(107, 153, 289, 19);
+		tf_dni.setBounds(107, 153, 236, 19);
 		contentPane.add(tf_dni);
 
 		tf_telefono = new JTextField();
 		tf_telefono.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_telefono.setColumns(10);
-		tf_telefono.setBounds(107, 124, 289, 19);
+		tf_telefono.setBounds(107, 124, 236, 19);
 		contentPane.add(tf_telefono);
 
 		JLabel lblTelefono = new JLabel("Telefono");
-		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTelefono.setBounds(10, 127, 96, 13);
+		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTelefono.setBounds(10, 127, 92, 13);
 		contentPane.add(lblTelefono);
 
 		JLabel lblCodigo = new JLabel("Codigo");
-		lblCodigo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCodigo.setBounds(10, 13, 133, 13);
+		lblCodigo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblCodigo.setBounds(10, 13, 92, 13);
 		contentPane.add(lblCodigo);
 
 		tf_codigoCliente = new JTextField();
@@ -112,7 +114,7 @@ public class ClientesFrame extends JFrame {
 		tf_codigoCliente.setEditable(false);
 		tf_codigoCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_codigoCliente.setColumns(10);
-		tf_codigoCliente.setBounds(107, 10, 289, 19);
+		tf_codigoCliente.setBounds(107, 10, 236, 19);
 		contentPane.add(tf_codigoCliente);
 
 		JComboBox cb_opciones = new JComboBox();
@@ -197,7 +199,7 @@ public class ClientesFrame extends JFrame {
 		contentPane.add(btn_ok);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 202, 675, 380);
+		scrollPane_1.setBounds(10, 202, 675, 274);
 		contentPane.add(scrollPane_1);
 
 		tblTabla = new JTable();

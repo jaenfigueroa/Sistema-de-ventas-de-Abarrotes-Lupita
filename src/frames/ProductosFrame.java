@@ -42,71 +42,73 @@ public class ProductosFrame extends JFrame {
 	 */
 	public ProductosFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 731, 484);
+		setBounds(100, 100, 731, 520);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNombre.setBounds(10, 43, 96, 13);
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNombre.setBounds(10, 43, 106, 13);
 		contentPane.add(lblNombre);
 
 		tf_nombres = new JTextField();
 		tf_nombres.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tf_nombres.setBounds(145, 39, 253, 19);
+		tf_nombres.setBounds(122, 39, 212, 19);
 		contentPane.add(tf_nombres);
 		tf_nombres.setColumns(10);
 
 		tf_precio = new JTextField();
 		tf_precio.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_precio.setColumns(10);
-		tf_precio.setBounds(145, 64, 253, 19);
+		tf_precio.setBounds(122, 64, 212, 19);
 		contentPane.add(tf_precio);
 
 		JLabel lblPrecio = new JLabel("Precio");
-		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblPrecio.setBounds(10, 68, 96, 13);
+		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPrecio.setBounds(10, 68, 106, 13);
 		contentPane.add(lblPrecio);
 
 		tf_StockActual = new JTextField();
 		tf_StockActual.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_StockActual.setColumns(10);
-		tf_StockActual.setBounds(145, 87, 253, 19);
+		tf_StockActual.setBounds(122, 87, 212, 19);
 		contentPane.add(tf_StockActual);
 
 		JLabel lblStock = new JLabel("Stock Actual");
-		lblStock.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblStock.setBounds(10, 91, 96, 13);
+		lblStock.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblStock.setBounds(10, 91, 106, 13);
 		contentPane.add(lblStock);
 
 		JLabel lblNewLabel_1_1 = new JLabel("Stock Maximo");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_1.setBounds(10, 145, 113, 13);
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_1_1.setBounds(10, 145, 106, 13);
 		contentPane.add(lblNewLabel_1_1);
 
 		tf_StockMaximo = new JTextField();
 		tf_StockMaximo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_StockMaximo.setColumns(10);
-		tf_StockMaximo.setBounds(145, 141, 253, 19);
+		tf_StockMaximo.setBounds(122, 141, 212, 19);
 		contentPane.add(tf_StockMaximo);
 
 		tf_StockMinimo = new JTextField();
 		tf_StockMinimo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_StockMinimo.setColumns(10);
-		tf_StockMinimo.setBounds(145, 116, 253, 19);
+		tf_StockMinimo.setBounds(122, 116, 212, 19);
 		contentPane.add(tf_StockMinimo);
 
 		JLabel lblTelefono = new JLabel("Stock Minimo");
-		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTelefono.setBounds(10, 120, 96, 13);
+		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTelefono.setBounds(10, 120, 106, 13);
 		contentPane.add(lblTelefono);
 
 		JLabel lblCodigo = new JLabel("Codigo");
-		lblCodigo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCodigo.setBounds(10, 14, 133, 13);
+		lblCodigo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblCodigo.setBounds(10, 14, 106, 13);
 		contentPane.add(lblCodigo);
 
 		tf_codigoCliente = new JTextField();
@@ -114,7 +116,7 @@ public class ProductosFrame extends JFrame {
 		tf_codigoCliente.setEditable(false);
 		tf_codigoCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_codigoCliente.setColumns(10);
-		tf_codigoCliente.setBounds(145, 10, 253, 19);
+		tf_codigoCliente.setBounds(122, 10, 212, 19);
 		contentPane.add(tf_codigoCliente);
 
 		JComboBox cb_opciones = new JComboBox();
@@ -204,7 +206,7 @@ public class ProductosFrame extends JFrame {
 		contentPane.add(btn_ok);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 189, 698, 247);
+		scrollPane.setBounds(10, 189, 698, 298);
 		contentPane.add(scrollPane);
 
 		tblTabla = new JTable();

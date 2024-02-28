@@ -1,6 +1,5 @@
 package frames;
 
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -38,25 +37,27 @@ public class AlmacenFrame extends JFrame {
 	 */
 	public AlmacenFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 618, 465);
+		setBounds(100, 100, 614, 304);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Stock actual anterior");
-		lblNewLabel.setBounds(235, 17, 149, 13);
+		JLabel lblNewLabel = new JLabel("Stock actual antes");
+		lblNewLabel.setBounds(399, 16, 108, 13);
 		contentPane.add(lblNewLabel);
 		
 		tf_stockactualantes = new JTextField();
 		tf_stockactualantes.setEditable(false);
-		tf_stockactualantes.setBounds(235, 36, 149, 19);
+		tf_stockactualantes.setBounds(517, 13, 72, 19);
 		contentPane.add(tf_stockactualantes);
 		tf_stockactualantes.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Cantidad de productos");
-		lblNewLabel_1.setBounds(10, 65, 174, 25);
+		lblNewLabel_1.setBounds(10, 46, 136, 13);
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnNewButton = new JButton("Actualizar Stock");
@@ -90,15 +91,15 @@ public class AlmacenFrame extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(450, 13, 139, 21);
+		btnNewButton.setBounds(190, 70, 124, 21);
 		contentPane.add(btnNewButton);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Código");
-		lblNewLabel_1_1.setBounds(10, 10, 105, 25);
+		JLabel lblNewLabel_1_1 = new JLabel("Código producto");
+		lblNewLabel_1_1.setBounds(10, 13, 136, 19);
 		contentPane.add(lblNewLabel_1_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 135, 579, 283);
+		scrollPane.setBounds(10, 111, 579, 146);
 		contentPane.add(scrollPane);
 		
 		tblTabla = new JTable();
@@ -116,23 +117,23 @@ public class AlmacenFrame extends JFrame {
 		 tblTabla.setModel(modelo);
 		 
 		 tf_codigo = new JTextField();
-		 tf_codigo.setBounds(10, 36, 174, 19);
+		 tf_codigo.setBounds(154, 14, 160, 19);
 		 contentPane.add(tf_codigo);
 		 tf_codigo.setColumns(10);
 		 
 		 tf_cantidad = new JTextField();
 		 tf_cantidad.setColumns(10);
-		 tf_cantidad.setBounds(10, 95, 174, 19);
+		 tf_cantidad.setBounds(154, 43, 160, 19);
 		 contentPane.add(tf_cantidad);
 		 
 		 tf_stockactualahora = new JTextField();
 		 tf_stockactualahora.setEditable(false);
 		 tf_stockactualahora.setColumns(10);
-		 tf_stockactualahora.setBounds(235, 95, 149, 19);
+		 tf_stockactualahora.setBounds(517, 39, 72, 19);
 		 contentPane.add(tf_stockactualahora);
 		 
 		 JLabel lblStockActualAhora = new JLabel("Stock actual ahora");
-		 lblStockActualAhora.setBounds(235, 76, 149, 13);
+		 lblStockActualAhora.setBounds(399, 39, 108, 19);
 		 contentPane.add(lblStockActualAhora);
 	}
 	
