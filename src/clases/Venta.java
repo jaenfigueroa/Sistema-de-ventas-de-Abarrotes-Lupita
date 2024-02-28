@@ -34,7 +34,10 @@ public class Venta {
 	}
 	
 	// Contructores
-	public Venta(int codigoCliente, int codigoProducto, int cantidad, double precio) {
+	public Venta(int codigoCliente, int codigoProducto, int cantidad) {
+		
+		double precio = ProductoManager.consultarProducto(codigoProducto).getPrecio();
+		
 		this.codigoVenta = Venta.CODIGO_CORRELATIVO_A_PARTIR + Venta.cantidadVentas;
 
 		this.codigoCliente = codigoCliente;

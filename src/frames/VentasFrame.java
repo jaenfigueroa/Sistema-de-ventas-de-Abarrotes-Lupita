@@ -84,8 +84,7 @@ public class VentasFrame extends JFrame {
 					Venta venta = VentaManager.agregarVenta(
 							codigoCliente,
 							producto.getCodigoProducto(),
-							cantidad,
-							producto.getPrecio()
+							cantidad
 						);
 					
 					// mostrar boleta
@@ -153,6 +152,7 @@ public class VentasFrame extends JFrame {
 		Cliente cliente = ClienteManager.consultarCliente(venta.getCodigoCliente());
 		
 		String boleta = "BOLETA DE VENTA\n\n";
+		boleta += "Fecha: " + venta.getFecha() + "\n\n";
 		
 		boleta += "Codigo del cliente: " + venta.getCodigoCliente() + "\n";
 		boleta += "Nombres y apellidos del cliente: " + cliente.getNombres() + " " + cliente.getApellidos() + "\n";

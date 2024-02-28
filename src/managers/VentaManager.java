@@ -12,6 +12,11 @@ public class VentaManager {
 	// Bloque de inicialización static
 	static {
 		ventas = new ArrayList<>();
+		
+		agregarVenta(1001, 2001, 5);
+		agregarVenta(1002, 2002, 10);
+		agregarVenta(1003, 2003, 5);
+		agregarVenta(1004, 2004, 10);
 	}
 
 	// Getters y Setters para las variables de clase
@@ -20,25 +25,13 @@ public class VentaManager {
 	}
 
 	// Metodos
-//	public static Venta getVenta(int codigoVentaBuscado) {
-//		
-//		Venta ventaEncontrada = null;
-//
-//        for (Venta cliente : VentaManager.ventas) {
-//            if (cliente.getCodigoCliente() == codigoVentaBuscado) {
-//            	ventaEncontrada = cliente;
-//                break;
-//            }
-//        }
-//        
-//        return ventaEncontrada;
-//	}
-	
-	
+
 	// metodo que se va encargar de realizar la venta
 	
-	public static Venta agregarVenta(int codigoCliente, int codigoProducto, int cantidad, double precio) {
-		Venta ventaNueva = new Venta(codigoCliente, codigoProducto, cantidad, precio);
+	public static Venta agregarVenta(int codigoCliente, int codigoProducto, int cantidad) {
+		
+//		double precio = ProductoManager.consultarProducto(codigoProducto).getPrecio();
+		Venta ventaNueva = new Venta(codigoCliente, codigoProducto, cantidad);
 		ventas.add(ventaNueva);
 		
 		// actualiza el stock actual del producto

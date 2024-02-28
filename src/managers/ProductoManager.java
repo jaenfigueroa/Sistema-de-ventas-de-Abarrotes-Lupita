@@ -14,10 +14,10 @@ public class ProductoManager {
 	static {
 		productos = new ArrayList<>();
 		
-		Producto producto_1 = new Producto("Atún", 3.5, 20, 5, 50);
-		Producto producto_2 = new Producto("Aceite", 8.5, 10, 5, 50);
-		Producto producto_3 = new Producto("Yogurt", 5, 15, 5, 50);
-		Producto producto_4 = new Producto("Arroz", 4, 20, 5, 50);
+		Producto producto_1 = new Producto("Atún", 3.5, 5, 10, 50);
+		Producto producto_2 = new Producto("Aceite", 8.5, 10, 10, 50);
+		Producto producto_3 = new Producto("Yogurt", 5, 3, 10, 50);
+		Producto producto_4 = new Producto("Arroz", 4, 20, 10, 50);
 		
 		agregarProducto(producto_1);
 		agregarProducto(producto_2);
