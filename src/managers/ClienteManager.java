@@ -11,7 +11,17 @@ public class ClienteManager {
 	
 	// Bloque de inicialización static
 	static {
-		clientes = new ArrayList<>();
+		clientes = new ArrayList<Cliente>();
+		
+		Cliente cliente_1 = new Cliente("Maria", "Salvatore", "MZ B LT 4", "945645258", "12345678");
+		Cliente cliente_2 = new Cliente("Pablo", "Pinto", "MZ G LT 12", "98545555", "987654321");
+		Cliente cliente_3 = new Cliente("Luis", "Urbina", "MZ E LT 6", "4848484848", "115155151");
+		Cliente cliente_4 = new Cliente("Luciana", "Pinto", "MZ H LT 7", "15484884", "944949494");
+		
+		agregarCliente(cliente_1);
+		agregarCliente(cliente_2);
+		agregarCliente(cliente_3);
+		agregarCliente(cliente_4);
 	}
 	
 	// Metodos

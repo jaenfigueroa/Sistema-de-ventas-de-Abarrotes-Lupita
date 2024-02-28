@@ -13,6 +13,16 @@ public class ProductoManager {
 	// Bloque de inicialización static
 	static {
 		productos = new ArrayList<>();
+		
+		Producto producto_1 = new Producto("Atún", 3.5, 20, 5, 50);
+		Producto producto_2 = new Producto("Aceite", 8.5, 10, 5, 50);
+		Producto producto_3 = new Producto("Yogurt", 5, 15, 5, 50);
+		Producto producto_4 = new Producto("Arroz", 4, 20, 5, 50);
+		
+		agregarProducto(producto_1);
+		agregarProducto(producto_2);
+		agregarProducto(producto_3);
+		agregarProducto(producto_4);
 	}
 	
 	// Getters y Setters para las variables de clase

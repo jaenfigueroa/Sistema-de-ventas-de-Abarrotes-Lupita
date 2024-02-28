@@ -2,6 +2,7 @@ package managers;
 
 import java.util.ArrayList;
 
+import clases.Producto;
 import clases.Venta;
 
 public class VentaManager {
@@ -14,14 +15,10 @@ public class VentaManager {
 	}
 
 	// Getters y Setters para las variables de clase
-//	public static ArrayList<Venta> getVentas() {
-//		return VentaManager.ventas;
-//	}
-//
-//	public static void setVentas(ArrayList<Venta> ventas) {
-//		VentaManager.ventas = ventas;
-//	}
-	
+	public static ArrayList<Venta> getVentas() {
+		return VentaManager.ventas;
+	}
+
 	// Metodos
 //	public static Venta getVenta(int codigoVentaBuscado) {
 //		
@@ -39,6 +36,20 @@ public class VentaManager {
 	
 	
 	// metodo que se va encargar de realizar la venta
+	
+	public static Venta agregarVenta(int codigoCliente, int codigoProducto, int cantidad, double precio) {
+		Venta ventaNueva = new Venta(codigoCliente, codigoProducto, cantidad, precio);
+		ventas.add(ventaNueva);
+		
+		// actualiza el stock actual del producto
+		
+		Producto producto = ProductoManager.consultarProducto(codigoProducto);
+		int nuevoStockActual = producto.getStockActual() - cantidad;
+		
+		producto.setStockActual(nuevoStockActual);
+		
+		return ventaNueva;
+	}
 	
 	
 }

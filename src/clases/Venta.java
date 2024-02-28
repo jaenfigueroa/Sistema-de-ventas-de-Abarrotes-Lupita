@@ -15,7 +15,7 @@ public class Venta {
 	private double precio;
 	private String fecha; // Formato: mm/dd/aaaa
 	
-	private final double IMPORTE_IGV = 1.18; // 18%
+	private final double IMPORTE_IGV = 0.18; // 18%
 	
 	private double importeSubtotal;
 	private double impuestoPagar;

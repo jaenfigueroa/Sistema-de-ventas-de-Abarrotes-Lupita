@@ -222,6 +222,8 @@ public class ClientesFrame extends JFrame {
 		});
 		btnNewButton_1.setBounds(565, 171, 120, 21);
 		contentPane.add(btnNewButton_1);
+		
+		rellenartabla();
 	}
 
 	// Metodos	
