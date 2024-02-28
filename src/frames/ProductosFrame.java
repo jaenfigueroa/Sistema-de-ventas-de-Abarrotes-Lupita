@@ -35,14 +35,15 @@ public class ProductosFrame extends JFrame {
 	private JTextField tf_StockMaximo;
 	private JTextField tf_StockMinimo;
 	private JTextField tf_codigoCliente;	
-	private JTextArea ta_resultados;
+	private JTable tblTabla;
+	private DefaultTableModel modelo;
 
 	/**
 	 * Create the frame.
 	 */
 	public ProductosFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1092, 664);
+		setBounds(100, 100, 731, 484);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -51,62 +52,62 @@ public class ProductosFrame extends JFrame {
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNombre.setBounds(10, 28, 96, 13);
+		lblNombre.setBounds(10, 43, 96, 13);
 		contentPane.add(lblNombre);
 		
 		tf_nombres = new JTextField();
 		tf_nombres.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tf_nombres.setBounds(209, 24, 189, 19);
+		tf_nombres.setBounds(145, 39, 253, 19);
 		contentPane.add(tf_nombres);
 		tf_nombres.setColumns(10);
 		
 		tf_precio = new JTextField();
 		tf_precio.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_precio.setColumns(10);
-		tf_precio.setBounds(209, 55, 95, 19);
+		tf_precio.setBounds(145, 64, 253, 19);
 		contentPane.add(tf_precio);
 		
 		JLabel lblPrecio = new JLabel("Precio");
 		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblPrecio.setBounds(10, 67, 96, 13);
+		lblPrecio.setBounds(10, 68, 96, 13);
 		contentPane.add(lblPrecio);
 		
 		tf_StockActual = new JTextField();
 		tf_StockActual.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_StockActual.setColumns(10);
-		tf_StockActual.setBounds(209, 105, 85, 19);
+		tf_StockActual.setBounds(145, 87, 253, 19);
 		contentPane.add(tf_StockActual);
 		
 		JLabel lblStock = new JLabel("Stock Actual");
 		lblStock.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblStock.setBounds(10, 109, 96, 13);
+		lblStock.setBounds(10, 91, 96, 13);
 		contentPane.add(lblStock);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Stock Maximo");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_1.setBounds(10, 197, 113, 13);
+		lblNewLabel_1_1.setBounds(10, 145, 113, 13);
 		contentPane.add(lblNewLabel_1_1);
 		
 		tf_StockMaximo = new JTextField();
 		tf_StockMaximo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_StockMaximo.setColumns(10);
-		tf_StockMaximo.setBounds(209, 193, 85, 19);
+		tf_StockMaximo.setBounds(145, 141, 253, 19);
 		contentPane.add(tf_StockMaximo);
 		
 		tf_StockMinimo = new JTextField();
 		tf_StockMinimo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_StockMinimo.setColumns(10);
-		tf_StockMinimo.setBounds(209, 154, 85, 19);
+		tf_StockMinimo.setBounds(145, 116, 253, 19);
 		contentPane.add(tf_StockMinimo);
 		
 		JLabel lblTelefono = new JLabel("Stock Minimo");
 		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTelefono.setBounds(10, 158, 96, 13);
+		lblTelefono.setBounds(10, 120, 96, 13);
 		contentPane.add(lblTelefono);
 		
-		JLabel lblCodigo = new JLabel("Codigo de cliente");
+		JLabel lblCodigo = new JLabel("Codigo");
 		lblCodigo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCodigo.setBounds(581, 31, 133, 13);
+		lblCodigo.setBounds(10, 14, 133, 13);
 		contentPane.add(lblCodigo);
 		
 		tf_codigoCliente = new JTextField();
@@ -114,7 +115,7 @@ public class ProductosFrame extends JFrame {
 		tf_codigoCliente.setEditable(false);
 		tf_codigoCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_codigoCliente.setColumns(10);
-		tf_codigoCliente.setBounds(715, 28, 96, 19);
+		tf_codigoCliente.setBounds(145, 10, 253, 19);
 		contentPane.add(tf_codigoCliente);
 		
 		JComboBox cb_opciones = new JComboBox();
@@ -129,7 +130,7 @@ public class ProductosFrame extends JFrame {
 			}
 		});
 		cb_opciones.setModel(new DefaultComboBoxModel(new String[] {"Crear", "Modificar", "Consultar", "Eliminar", "Listar"}));
-		cb_opciones.setBounds(867, 26, 180, 19);
+		cb_opciones.setBounds(528, 13, 180, 19);
 		contentPane.add(cb_opciones);
 		
 		JButton btn_ok = new JButton("OK");
@@ -145,13 +146,8 @@ public class ProductosFrame extends JFrame {
 				// Recoger la accion a realizar
 				int accionARealizar = cb_opciones.getSelectedIndex();
 				
-
 				// Elegir la accion a realizar
-				
-//				
-				
-				
-				
+			
 				int codigoProducto = Integer.parseInt(tf_codigoCliente.getText());
 				
 				switch (accionARealizar) {
@@ -162,83 +158,100 @@ public class ProductosFrame extends JFrame {
 						
 						Producto producto = new Producto(nombres, precio, stockActual, stockMinimo, stockMaximo);
 						ProductoManager.agregarProducto(producto);
-						
-						// Mostrar el codigo de cliente recién creado
+//						
+//						// Mostrar el codigo de cliente recién creado
 						tf_codigoCliente.setText(producto.getCodigoProducto() + "");
-
-						limpiar();
-						mostrarDatosProducto(producto);
+//
+						limpiarTabla();
+						rellenartabla();
 						break;
 					
 					// MODIFICAR
 					case 1:
 						Producto productoModificado = ProductoManager.modificarProducto( codigoProducto, nombres, precio, stockActual, stockMinimo, stockMaximo);
-						limpiar();
-						mostrarDatosProducto(productoModificado);
+						limpiarTabla();
+						rellenartabla();
 						break;
 						
 					// CONSULTAR
 					case 2:
 						Producto productoEncontrado = ProductoManager.consultarProducto(codigoProducto);
-						limpiar();
-						mostrarDatosProducto(productoEncontrado);
+						limpiarTabla();
+						rellenartabla(productoEncontrado);
 						break;
 						
 					// ELIMINAR
 					case 3:
 						ProductoManager.eliminarProducto(codigoProducto);
-						limpiar();
-						ta_resultados.setText("Producto eliminado");
+						limpiarTabla();
+						rellenartabla();
 						break;
 						
 					// LISTAR
 					case 4:
-						ArrayList<Producto> productosEncontrados = ProductoManager.listarProductos();
-
-						limpiar();
-						if( productosEncontrados.size() > 0) {
-							for (int i = 0; i < productosEncontrados.size(); i++) {
-								mostrarDatosProducto(productosEncontrados.get(i));
-								ta_resultados.append("\n----------------------------------------------\n");
-							}
-						} else { ta_resultados.append("No hay productos para mostrar");}
-					
-						
-						
+						limpiarTabla();
+						rellenartabla();
 						break;
 				}
 				
 			}
 		});
-		btn_ok.setBounds(437, 195, 85, 21);
+		btn_ok.setBounds(623, 39, 85, 21);
 		contentPane.add(btn_ok);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 230, 1016, 371);
+		scrollPane.setBounds(10, 189, 698, 247);
 		contentPane.add(scrollPane);
 		
-		ta_resultados = new JTextArea();
-		scrollPane.setViewportView(ta_resultados);
+		tblTabla = new JTable();
+		scrollPane.setViewportView(tblTabla);
+		
+		 modelo = new DefaultTableModel();
+		 modelo.addColumn("Código");
+		 modelo.addColumn("Nombre");
+		 modelo.addColumn("Precio");
+		 modelo.addColumn("Stock actual");
+		 modelo.addColumn("Stock minimo");
+		 modelo.addColumn("Stock maximo");
+
+		 tblTabla.setModel(modelo);
 	}
 	
 	// Metodos
-	public void mostrarDatosProducto(Producto producto) {
-		
-		if(producto != null) {
-			String mensaje = "Codigo del producto: " + producto.getCodigoProducto();
-			mensaje += "\nNombre: " + producto.getNombre();	
-			mensaje += "\nPrecio: " + producto.getPrecio();
-			mensaje += "\nStock Actualn: " + producto.getStockActual();
-			mensaje += "\nStock Minimo: " + producto.getStockMinimo();
-			mensaje += "\nStock Maximo: " + producto.getStockMaximo();
-			
-			ta_resultados.append(mensaje);
-		} else {
-			ta_resultados.append("no existe");
-		}
+	public void limpiarTabla() {		
+		while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
 	}
-
-	public void limpiar() {
-		ta_resultados.setText("");
+	
+	public void rellenartabla(Producto x) {		
+		modelo.setRowCount(0);
+		Object[] fila = {
+				x.getCodigoProducto(),
+				x.getNombre(),
+				x.getPrecio(),
+				x.getStockActual(),
+				x.getStockMinimo(),
+				x.getStockMaximo(),
+		};
+		modelo.addRow(fila);
+	}
+	
+	public void rellenartabla() {
+		ArrayList<Producto> productos = ProductoManager.listarProductos();
+		
+		for (int i = 0; i < productos.size(); i++) {
+			
+			modelo.setRowCount(i);
+			Object[] fila = {
+					productos.get(i).getCodigoProducto(),
+					productos.get(i).getNombre(),
+					productos.get(i).getPrecio(),
+					productos.get(i).getStockActual(),
+					productos.get(i).getStockMinimo(),
+					productos.get(i).getStockMaximo(),
+			};
+			modelo.addRow(fila);
+		}
 	}
 }

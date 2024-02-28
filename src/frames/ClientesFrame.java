@@ -178,7 +178,7 @@ public class ClientesFrame extends JFrame {
 				case 2:
 					Cliente clienteEncontrado = ClienteManager.consultarCliente(codigoCliente);
 					limpiarTabla();
-					rellenartablacccccc(clienteEncontrado);
+					rellenartabla(clienteEncontrado);
 					break;
 
 				// ELIMINAR
@@ -225,21 +225,13 @@ public class ClientesFrame extends JFrame {
 	}
 
 	// Metodos	
-	public void rellenarUsuario(Cliente cliente) {
-		tf_nombres.setText(cliente.getNombres() + "");
-		tf_apellidos.setText(cliente.getApellidos() + "");
-		tf_direccion.setText(cliente.getDireccion() + "");
-		tf_telefono.setText(cliente.getTelefono() + "");
-		tf_dni.setText(cliente.getDni() + "");
-	}
-	
 	public void limpiarTabla() {		
 		while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
 	}
 	
-	public void rellenartablacccccc(Cliente x) {		
+	public void rellenartabla(Cliente x) {		
 		modelo.setRowCount(0);
 		Object[] fila = {
 				x.getCodigoCliente(),
