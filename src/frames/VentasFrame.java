@@ -18,50 +18,76 @@ public class VentasFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tf_stockActual;
+	private JTable tblTabla;
+	private DefaultTableModel modelo;
+	private JTextField tf_codigo;
+	private JTextField tf_cantidad;
 
 	/**
 	 * Create the frame.
 	 */
 	public VentasFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1092, 664);
+		setBounds(100, 100, 618, 465);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(10, 29, 259, 21);
-		contentPane.add(comboBox);
-		
-		JLabel lblNewLabel = new JLabel("Stock del producto");
-		lblNewLabel.setBounds(338, 33, 93, 13);
+		JLabel lblNewLabel = new JLabel("Stock actual del producto");
+		lblNewLabel.setBounds(235, 17, 149, 13);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(450, 30, 96, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(118, 74, 200, 21);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		tf_stockActual = new JTextField();
+		tf_stockActual.setEditable(false);
+		tf_stockActual.setBounds(235, 36, 149, 19);
+		contentPane.add(tf_stockActual);
+		tf_stockActual.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Cantidad de productos");
-		lblNewLabel_1.setBounds(10, 74, 105, 25);
+		lblNewLabel_1.setBounds(10, 65, 105, 25);
 		contentPane.add(lblNewLabel_1);
 		
-		JButton btnNewButton = new JButton("Vender");
-		btnNewButton.setBounds(947, 29, 85, 21);
+		JButton btnNewButton = new JButton("Actualizar Stock");
+		btnNewButton.setBounds(469, 13, 120, 21);
 		contentPane.add(btnNewButton);
 		
-		JTextArea ta_resultados = new JTextArea();
-		ta_resultados.setBounds(10, 129, 1022, 469);
-		contentPane.add(ta_resultados);
+		JLabel lblNewLabel_1_1 = new JLabel("Código");
+		lblNewLabel_1_1.setBounds(10, 10, 105, 25);
+		contentPane.add(lblNewLabel_1_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 135, 579, 283);
+		contentPane.add(scrollPane);
+		
+		tblTabla = new JTable();
+		tblTabla.setFillsViewportHeight(true);
+		scrollPane.setViewportView(tblTabla);
+		
+		 modelo = new DefaultTableModel();
+		 modelo.addColumn("Código");
+		 modelo.addColumn("Nombre");
+		 modelo.addColumn("Precio");
+		 modelo.addColumn("Stock actual");
+		 modelo.addColumn("Stock minimo");
+		 modelo.addColumn("Stock maximo");
+		 
+		 tblTabla.setModel(modelo);
+		 
+		 tf_codigo = new JTextField();
+		 tf_codigo.setBounds(10, 36, 174, 19);
+		 contentPane.add(tf_codigo);
+		 tf_codigo.setColumns(10);
+		 
+		 tf_cantidad = new JTextField();
+		 tf_cantidad.setColumns(10);
+		 tf_cantidad.setBounds(10, 95, 174, 19);
+		 contentPane.add(tf_cantidad);
+		 
+//		 modelo.setRowCount(0);
+//		 Object[] fila = { 123, "Ana", 19, 15, 17.0 };
+//		 modelo.addRow(fila);
 	}
 }

@@ -5,8 +5,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -17,93 +21,147 @@ import managers.ProductoManager;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 
 public class AlmacenFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table;
-	private JSpinner sp_codigoProducto;
-	private JSpinner sp_cantidadUnidades;
+	private JTextField tf_stockactualantes;
+	private JTable tblTabla;
+	private DefaultTableModel modelo;
+	private JTextField tf_codigo;
+	private JTextField tf_cantidad;
+	private JTextField tf_stockactualahora;
 
 	/**
 	 * Create the frame.
 	 */
 	public AlmacenFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1092, 664);
+		setBounds(100, 100, 618, 465);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Codigo del producto");
-		lblNewLabel.setBounds(10, 38, 124, 13);
+		JLabel lblNewLabel = new JLabel("Stock actual anterior");
+		lblNewLabel.setBounds(235, 17, 149, 13);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblCantidadDeUnidades = new JLabel("Cantidad de unidades");
-		lblCantidadDeUnidades.setBounds(10, 80, 124, 13);
-		contentPane.add(lblCantidadDeUnidades);
+		tf_stockactualantes = new JTextField();
+		tf_stockactualantes.setEditable(false);
+		tf_stockactualantes.setBounds(235, 36, 149, 19);
+		contentPane.add(tf_stockactualantes);
+		tf_stockactualantes.setColumns(10);
 		
-		JButton btn_agregarStock = new JButton("Ingresar nuevo stock");
-		btn_agregarStock.addActionListener(new ActionListener() {
+		JLabel lblNewLabel_1 = new JLabel("Cantidad de productos");
+		lblNewLabel_1.setBounds(10, 65, 174, 25);
+		contentPane.add(lblNewLabel_1);
+		
+		JButton btnNewButton = new JButton("Actualizar Stock");
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int codigoProducto = (int) sp_codigoProducto.getValue();
-				int cantidadUnidades = (int) sp_cantidadUnidades.getValue();
+				limpiar();
+				limpiarTabla();
 				
-				ingresarNuevoStock(codigoProducto,cantidadUnidades );
+				// recoger el codigo y la cantidad
+				int codigo = Integer.parseInt(tf_codigo.getText());
+				int cantidad = Integer.parseInt(tf_cantidad.getText());
+				
+				Producto producto = ProductoManager.consultarProducto(codigo);
+				
+				// mostrar valores de stock
+				tf_stockactualantes.setText(producto.getStockActual() + "");
+				
+				// verfiicar que el nuevo stock actual no supere el stock maximo
+				int nuevoStock = producto.getStockActual() + cantidad;
+				
+				if(nuevoStock <= producto.getStockMaximo()) {
+					// agregar normal
+					producto.setStockActual(nuevoStock);
+					
+					tf_stockactualahora.setText(producto.getStockActual() + "");
+					
+					rellenartabla(producto);
+				} else {
+					// mostra mensaje
+					mostrarMensaje("El nuevo stock supera el stock máximo");
+				}
 			}
 		});
-		btn_agregarStock.setBounds(852, 34, 169, 21);
-		contentPane.add(btn_agregarStock);
+		btnNewButton.setBounds(450, 13, 139, 21);
+		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Código");
+		lblNewLabel_1_1.setBounds(10, 10, 105, 25);
+		contentPane.add(lblNewLabel_1_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 137, 1019, 467);
+		scrollPane.setBounds(10, 135, 579, 283);
 		contentPane.add(scrollPane);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"Codigo", "Nombre", "Precio", "Stock minimo", "Stock actual", "Stock maximo"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, Double.class, Integer.class, Integer.class, Integer.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		tblTabla = new JTable();
+		tblTabla.setFillsViewportHeight(true);
+		scrollPane.setViewportView(tblTabla);
 		
-		sp_codigoProducto = new JSpinner();
-		sp_codigoProducto.setModel(new SpinnerNumberModel(Integer.valueOf(0), null, null, Integer.valueOf(1)));
-		sp_codigoProducto.setBounds(142, 35, 124, 20);
-		contentPane.add(sp_codigoProducto);
-		
-		sp_cantidadUnidades = new JSpinner();
-		sp_cantidadUnidades.setBounds(144, 77, 124, 20);
-		contentPane.add(sp_cantidadUnidades);
+		 modelo = new DefaultTableModel();
+		 modelo.addColumn("Código");
+		 modelo.addColumn("Nombre");
+		 modelo.addColumn("Precio");
+		 modelo.addColumn("Stock actual");
+		 modelo.addColumn("Stock minimo");
+		 modelo.addColumn("Stock maximo");
+		 
+		 tblTabla.setModel(modelo);
+		 
+		 tf_codigo = new JTextField();
+		 tf_codigo.setBounds(10, 36, 174, 19);
+		 contentPane.add(tf_codigo);
+		 tf_codigo.setColumns(10);
+		 
+		 tf_cantidad = new JTextField();
+		 tf_cantidad.setColumns(10);
+		 tf_cantidad.setBounds(10, 95, 174, 19);
+		 contentPane.add(tf_cantidad);
+		 
+		 tf_stockactualahora = new JTextField();
+		 tf_stockactualahora.setEditable(false);
+		 tf_stockactualahora.setColumns(10);
+		 tf_stockactualahora.setBounds(235, 95, 149, 19);
+		 contentPane.add(tf_stockactualahora);
+		 
+		 JLabel lblStockActualAhora = new JLabel("Stock actual ahora");
+		 lblStockActualAhora.setBounds(235, 76, 149, 13);
+		 contentPane.add(lblStockActualAhora);
 	}
-
-	// Metodos
-	public void ingresarNuevoStock(int codigoProducto, int cantidadUnidades) {
-		Producto producto = ProductoManager.consultarProducto(codigoProducto);
-		
-		int stockNuevo = producto.getStockActual() + cantidadUnidades;
-		boolean comprobacion = stockNuevo <= producto.getStockMaximo();
-		
-		if(comprobacion) {
-			producto.setStockActual(stockNuevo);
-		} 
-		else {
-			producto.setStockActual(producto.getStockMaximo());
-		}
+	
+	// metodo
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void limpiar() {
+		tf_stockactualantes.setText("");
+		tf_stockactualahora.setText("");
+	}
+	
+	public void limpiarTabla() {		
+		while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+	}
+	
+	public void rellenartabla(Producto x) {		
+		modelo.setRowCount(0);
+		Object[] fila = {
+				x.getCodigoProducto(),
+				x.getNombre(),
+				x.getPrecio(),
+				x.getStockActual(),
+				x.getStockMinimo(),
+				x.getStockMaximo(),
+		};
+		modelo.addRow(fila);
 	}
 }
