@@ -11,6 +11,11 @@ public class Producto {
 	private int stockMinimo;
 	private int stockMaximo;
 	
+	// cantidad acumulada de unidades vendidas
+	private int cantidadVentasAcumuladas;
+	// cantidad acumulada de importe a pagar
+	private double cantidadImporteAcumulado;
+	
 	// Variables de clase
 	private static int cantidadProductos;
 	
@@ -84,6 +89,22 @@ public class Producto {
 
 	public void setStockMaximo(int stockMaximo) {
 		this.stockMaximo = stockMaximo;
+	}
+	
+	public int getCantidadVentasAcumuladas() {
+		return cantidadVentasAcumuladas;
+	}
+
+	public void setCantidadVentasAcumuladas(int cantidadVentasAcumuladas) {
+		this.cantidadVentasAcumuladas = cantidadVentasAcumuladas;
+	}
+
+	public double getCantidadImporteAcumulado() {
+		return cantidadImporteAcumulado;
+	}
+
+	public void setCantidadImporteAcumulado(double cantidadImporteAcumulado) {
+		this.cantidadImporteAcumulado = cantidadImporteAcumulado;
 	}
 
 	// Getters y setters para variables de clase

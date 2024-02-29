@@ -39,12 +39,14 @@ public class ClientesFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ClientesFrame() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 709, 520);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setTitle("Clientes");
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

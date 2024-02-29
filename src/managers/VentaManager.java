@@ -12,19 +12,6 @@ public class VentaManager {
 	// Bloque de inicialización static
 	static {
 		ventas = new ArrayList<>();
-		
-		agregarVenta(1001, 2001, 5);
-		agregarVenta(1002, 2002, 10);
-		agregarVenta(1003, 2003, 5);
-		agregarVenta(1004, 2004, 10);
-		agregarVenta(1001, 2001, 5);
-		agregarVenta(1002, 2002, 10);
-		agregarVenta(1003, 2001, 5);
-		agregarVenta(1004, 2004, 10);
-		agregarVenta(1001, 2004, 5);
-		agregarVenta(1002, 2003, 10);
-		agregarVenta(1003, 2001, 5);
-		agregarVenta(1004, 2001, 10);
 	}
 
 	// Getters y Setters para las variables de clase
@@ -43,11 +30,19 @@ public class VentaManager {
 		ventas.add(ventaNueva);
 		
 		// actualiza el stock actual del producto
-		
 		Producto producto = ProductoManager.consultarProducto(codigoProducto);
-		int nuevoStockActual = producto.getStockActual() - cantidad;
 		
+		
+		int nuevoStockActual = producto.getStockActual() - cantidad;
 		producto.setStockActual(nuevoStockActual);
+		
+		// actualizar la cantidad unidades vendidas
+		int nuevaCantidadVentas = producto.getCantidadVentasAcumuladas() + cantidad;
+		producto.setCantidadVentasAcumuladas( nuevaCantidadVentas );
+		
+		// actualizar la cantidad importe total acumulado
+		double nuevaCantidadImporteAcumulado = producto.getCantidadImporteAcumulado() + ventaNueva.getImporteTotalPagar();
+		producto.setCantidadImporteAcumulado(nuevaCantidadImporteAcumulado);
 		
 		return ventaNueva;
 	}

@@ -44,12 +44,14 @@ public class VentasFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public VentasFrame() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 614, 406);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setTitle("Ventas");
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

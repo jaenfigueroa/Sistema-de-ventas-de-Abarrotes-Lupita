@@ -35,12 +35,14 @@ public class ReportesFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ReportesFrame() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 510);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setTitle("Reportes");
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -71,9 +73,7 @@ public class ReportesFrame extends JFrame {
 						// listado de todas las ventas
 						// codigo venta, codigo cliente, codigo producto, fecha, importe subototal, importe impuesto, importe total
 						
-						for (int i = 0; i < VentaManager.getVentas().size(); i++) {
-							Venta venta = VentaManager.getVentas().get(i);
-							
+						for (Venta venta : VentaManager.getVentas()) {
 							reporte += "Codigo de venta: " + venta.getCodigoVenta() + "\n";
 							reporte += "Codigo de cliente: " + venta.getCodigoCliente() + "\n";
 							reporte += "Codigo producto: " + venta.getCodigoProducto() + "\n";
@@ -108,14 +108,22 @@ public class ReportesFrame extends JFrame {
 					case 2:
 						// listado de productos mostrando la cantidad de unidades vendidas acumuladas
 						// código, nombre y cantidad de unidades vendidas acumuladas
-						
-						
+
+						for (Producto producto : ProductoManager.getProductos()) {
+							reporte += "Codigo: " + producto.getCodigoProducto() + "\n";
+							reporte += "Nombre: " + producto.getNombre() + "\n";
+							reporte += "Unidades vendidas acumuladas: " + producto.getCantidadVentasAcumuladas() + "\n\n";
+						}
 						
 						break;
 					case 3:
 						// listado de productos mostrando la cantidad importe total acumulado
 						// código, nombre e importe total acumulado
-						
+						for (Producto producto : ProductoManager.getProductos()) {
+							reporte += "Codigo: " + producto.getCodigoProducto() + "\n";
+							reporte += "Nombre: " + producto.getNombre() + "\n";
+							reporte += "Importe total acumulado: " + producto.getCantidadImporteAcumulado() + "\n\n";
+						}
 
 						break;
 				}

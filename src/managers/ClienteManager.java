@@ -12,16 +12,6 @@ public class ClienteManager {
 	// Bloque de inicialización static
 	static {
 		clientes = new ArrayList<Cliente>();
-		
-		agregarCliente(new Cliente("Maria", "Salvatore", "MZ B LT 4", "945645258", "12345678"));
-		agregarCliente(new Cliente("Pablo", "Pinto", "MZ G LT 12", "98545555", "987654321"));
-		agregarCliente(new Cliente("Luis", "Urbina", "MZ E LT 6", "4848484848", "115155151"));
-		agregarCliente(new Cliente("Luciana", "Pinto", "MZ H LT 7", "15484884", "944949494"));
-		agregarCliente(new Cliente("Ana", "Martinez", "MZ F LT 10", "986547854", "369852147"));
-	    agregarCliente(new Cliente("Diego", "Garcia", "MZ D LT 5", "978563214", "258741369"));
-	    agregarCliente(new Cliente("Laura", "Lopez", "MZ J LT 15", "967854321", "123456789"));
-	    agregarCliente(new Cliente("Sofia", "Rodriguez", "MZ C LT 8", "954875236", "987654321"));
-	    agregarCliente(new Cliente("Carlos", "Sanchez", "MZ I LT 13", "965874123", "654321987"));
 	}
 	
 	// Metodos

@@ -25,12 +25,14 @@ public class DashboardFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public DashboardFrame() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 583, 160);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setTitle("Aplicación");
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
