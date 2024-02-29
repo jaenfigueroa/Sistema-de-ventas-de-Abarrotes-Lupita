@@ -74,6 +74,10 @@ public class AlmacenFrame extends JFrame {
 				
 				Producto producto = ProductoManager.consultarProducto(codigo);
 				
+				if(producto == null) {
+					mostrarMensaje("EL producto no existe");
+				}
+				
 				// mostrar valores de stock
 				tf_stockactualantes.setText(producto.getStockActual() + "");
 				

@@ -78,8 +78,17 @@ public class VentasFrame extends JFrame {
 				int codigoProducto = Integer.parseInt(tf_codigoProducto.getText());
 				int cantidad = Integer.parseInt(tf_cantidad.getText());
 				
+				
 				// conseguir el producto
+				Cliente cliente = ClienteManager.consultarCliente(codigoCliente);
 				Producto producto = ProductoManager.consultarProducto(codigoProducto);
+				
+				if(producto == null) {
+					mostrarMensaje("EL producto no existe");
+				}
+				if(cliente == null) {
+					mostrarMensaje("EL cliente no existe");
+				}
 				
 				// mostrar el stock actual
 				tf_stockActualAnterior.setText(producto.getStockActual() + "");
