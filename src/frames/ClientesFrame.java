@@ -11,6 +11,8 @@ import clases.Cliente;
 import managers.ClienteManager;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -124,10 +126,41 @@ public class ClientesFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int opcionElegida = cb_opciones.getSelectedIndex();
 
-				if (opcionElegida == 1 || opcionElegida == 2 || opcionElegida == 3) {
-					tf_codigoCliente.setEditable(true);
-				} else {
+				if(opcionElegida == 0) { // CREAR
 					tf_codigoCliente.setEditable(false);
+					tf_nombres.setEditable(true);
+					tf_apellidos.setEditable(true);
+					tf_direccion.setEditable(true);
+					tf_telefono.setEditable(true);
+					tf_dni.setEditable(true);
+				} else if (opcionElegida == 1) { // MODIFICAR
+					tf_codigoCliente.setEditable(true);
+					tf_nombres.setEditable(true);
+					tf_apellidos.setEditable(true);
+					tf_direccion.setEditable(true);
+					tf_telefono.setEditable(true);
+					tf_dni.setEditable(true);
+				} else if(opcionElegida == 2) { // CONSULTAR
+					tf_codigoCliente.setEditable(true);
+					tf_nombres.setEditable(false);
+					tf_apellidos.setEditable(false);
+					tf_direccion.setEditable(false);
+					tf_telefono.setEditable(false);
+					tf_dni.setEditable(false);
+				} else if (opcionElegida == 3) { // ELIMINAR
+					tf_codigoCliente.setEditable(true);
+					tf_nombres.setEditable(false);
+					tf_apellidos.setEditable(false);
+					tf_direccion.setEditable(false);
+					tf_telefono.setEditable(false);
+					tf_dni.setEditable(false);
+				} else if (opcionElegida == 4) { // LISTAR
+					tf_codigoCliente.setEditable(false);
+					tf_nombres.setEditable(false);
+					tf_apellidos.setEditable(false);
+					tf_direccion.setEditable(false);
+					tf_telefono.setEditable(false);
+					tf_dni.setEditable(false);
 				}
 			}
 		});
@@ -168,6 +201,7 @@ public class ClientesFrame extends JFrame {
 
 				// MODIFICAR
 				case 1:
+					
 					Cliente clienteModificado = ClienteManager.modificarCliente(
 							codigoCliente,
 							nombres,
@@ -176,19 +210,34 @@ public class ClientesFrame extends JFrame {
 							telefono,
 							dni);
 					rellenartabla();
+
+					if(clienteModificado == null) {
+						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe, no se editó");
+					}
+						
 					break;
 
 				// CONSULTAR
 				case 2:
-					Cliente clienteEncontrado = ClienteManager.consultarCliente(codigoCliente);
-					limpiarTabla();
-					rellenartabla(clienteEncontrado);
+					try {
+						Cliente clienteEncontrado = ClienteManager.consultarCliente(codigoCliente);
+						limpiarTabla();
+						rellenartabla(clienteEncontrado);
+					} catch (Exception e2) {
+						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe");
+					}
+					
 					break;
 
 				// ELIMINAR
 				case 3:
-					ClienteManager.eliminarCliente(codigoCliente);
+					int clienteEliminado = ClienteManager.eliminarCliente(codigoCliente);
 					rellenartabla();
+					
+					if(clienteEliminado == -1) {
+						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe, no se eliminó");
+					}
+					
 					break;			
 
 				// LISTAR
@@ -266,5 +315,9 @@ public class ClientesFrame extends JFrame {
 			};
 			modelo.addRow(fila);
 		}
+	}
+	
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

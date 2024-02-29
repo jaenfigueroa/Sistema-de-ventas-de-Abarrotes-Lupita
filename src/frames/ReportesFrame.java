@@ -48,6 +48,33 @@ public class ReportesFrame extends JFrame {
 		contentPane.setLayout(null);
 
 		JComboBox cb_tipoReporte = new JComboBox();
+		cb_tipoReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				// recogemos el tipo de reporte del combo box
+				int accionARealizar = cb_tipoReporte.getSelectedIndex();
+				
+				String reporte = "";
+
+				switch (accionARealizar) {
+					case 0:
+						reporte += generarReporte1(VentaManager.getVentas());
+						break;
+					case 1:
+						reporte += generarReporte2(ProductoManager.getProductos());
+						break;
+					case 2:
+						reporte += generarReporte3(ProductoManager.getProductos());
+						break;
+					case 3:
+						reporte += generarReporte4(ProductoManager.getProductos());
+						break;
+				}
+				
+				ta_salida.setText(reporte);
+			}
+
+		});
 		cb_tipoReporte.setModel(new DefaultComboBoxModel(new String[] { "Listado general de ventas",
 				"Listado de productos cuyo stock se encuentra por debajo del stock mínimo",
 				"Listado de productos por unidades vendidas acumuladas",
@@ -58,84 +85,9 @@ public class ReportesFrame extends JFrame {
 		JLabel lblNewLabel = new JLabel("Tipo de reporte");
 		lblNewLabel.setBounds(10, 10, 104, 21);
 		contentPane.add(lblNewLabel);
-
-		JButton btn_generarReporte = new JButton("Generar reporte");
-		btn_generarReporte.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				// recogemos el tipo de reporte del combo box
-				int accionARealizar = cb_tipoReporte.getSelectedIndex();
-				
-				String reporte = "REPORTE\n\n";
-
-				switch (accionARealizar) {
-					case 0:
-						// listado de todas las ventas
-						// codigo venta, codigo cliente, codigo producto, fecha, importe subototal, importe impuesto, importe total
-						
-						for (Venta venta : VentaManager.getVentas()) {
-							reporte += "Codigo de venta: " + venta.getCodigoVenta() + "\n";
-							reporte += "Codigo de cliente: " + venta.getCodigoCliente() + "\n";
-							reporte += "Codigo producto: " + venta.getCodigoProducto() + "\n";
-							reporte += "Fecha de venta: " + venta.getFecha() + "\n";
-							
-//							reporte += "Cantidad: " + venta.getCantidad() + "\n";
-//							reporte += "Precio unitario: " + venta.getPrecio() + "\n";
-							
-							reporte += "Importe subototal: S/. " + venta.getImporteSubtotal() + "\n";
-							reporte += "Importe impuesto: S/. " + venta.getImpuestoPagar() + "\n";
-							reporte += "Importe total: S/. " + venta.getImporteTotalPagar() + "\n\n";
-						}
-						
-						break;
-					case 1:
-						// listado de productos con stock debajo de stock minimo
-						// código, nombre, stock actual y stock mínimo
-						
-						for(int i = 0; i < ProductoManager.getProductos().size(); i++) {
-							
-							Producto producto = ProductoManager.getProductos().get(i);
-							
-							if(producto.getStockActual() < producto.getStockMinimo()) {
-								reporte += "Codigo: " + producto.getCodigoProducto() + "\n";
-								reporte += "Nombre: " + producto.getNombre() + "\n";
-								reporte += "Stock actual: " + producto.getStockActual() + "\n";
-								reporte += "Stock minimo: " + producto.getStockMinimo() + "\n\n";
-							}
-						}
-						
-						break;
-					case 2:
-						// listado de productos mostrando la cantidad de unidades vendidas acumuladas
-						// código, nombre y cantidad de unidades vendidas acumuladas
-
-						for (Producto producto : ProductoManager.getProductos()) {
-							reporte += "Codigo: " + producto.getCodigoProducto() + "\n";
-							reporte += "Nombre: " + producto.getNombre() + "\n";
-							reporte += "Unidades vendidas acumuladas: " + producto.getCantidadVentasAcumuladas() + "\n\n";
-						}
-						
-						break;
-					case 3:
-						// listado de productos mostrando la cantidad importe total acumulado
-						// código, nombre e importe total acumulado
-						for (Producto producto : ProductoManager.getProductos()) {
-							reporte += "Codigo: " + producto.getCodigoProducto() + "\n";
-							reporte += "Nombre: " + producto.getNombre() + "\n";
-							reporte += "Importe total acumulado: " + producto.getCantidadImporteAcumulado() + "\n\n";
-						}
-
-						break;
-				}
-				
-				ta_salida.setText(reporte);
-			}
-		});
-		btn_generarReporte.setBounds(475, 39, 147, 21);
-		contentPane.add(btn_generarReporte);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 70, 611, 381);
+		scrollPane.setBounds(10, 44, 611, 407);
 		contentPane.add(scrollPane);
 		
 		ta_salida = new JTextArea();
@@ -157,6 +109,9 @@ public class ReportesFrame extends JFrame {
 		modelo_2.addColumn("Stock actual");
 		modelo_2.addColumn("Stock minimo");
 		modelo_2.addColumn("Stock maximo");
+		
+		// generar el reporte 1 por defecto
+		ta_salida.setText(generarReporte1(VentaManager.getVentas()));
 	}
 	
 	// metodos
@@ -176,4 +131,67 @@ public class ReportesFrame extends JFrame {
 			modelo.addRow(fila);
 		}
 	}
+	
+	// reportes
+	public String generarReporte1(ArrayList<Venta> ventas) {
+		String reporte = "REPORTE\n\n";
+		
+		for (Venta venta : ventas) {
+			reporte += "Codigo de venta: " + venta.getCodigoVenta() + "\n";
+			reporte += "Codigo de cliente: " + venta.getCodigoCliente() + "\n";
+			reporte += "Codigo producto: " + venta.getCodigoProducto() + "\n";
+			reporte += "Fecha de venta: " + venta.getFecha() + "\n";
+			
+//			reporte += "Cantidad: " + venta.getCantidad() + "\n";
+//			reporte += "Precio unitario: " + venta.getPrecio() + "\n";
+			
+			reporte += "Importe subototal: S/. " + venta.getImporteSubtotal() + "\n";
+			reporte += "Importe impuesto: S/. " + venta.getImpuestoPagar() + "\n";
+			reporte += "Importe total: S/. " + venta.getImporteTotalPagar() + "\n\n";
+		}
+		
+		return reporte;
+	}
+	
+	public String generarReporte2(ArrayList<Producto> productos) {
+		
+		String reporte = "REPORTE\n\n";
+		
+		for (Producto producto : productos) {
+			if(producto.getStockActual() < producto.getStockMinimo()) {
+				reporte += "Codigo: " + producto.getCodigoProducto() + "\n";
+				reporte += "Nombre: " + producto.getNombre() + "\n";
+				reporte += "Stock actual: " + producto.getStockActual() + "\n";
+				reporte += "Stock minimo: " + producto.getStockMinimo() + "\n\n";
+			}
+		}
+		
+		return reporte;
+	}
+	
+	public String generarReporte3(ArrayList<Producto> productos) {
+		String reporte = "REPORTE\n\n";
+		
+		for (Producto producto : productos) {
+			reporte += "Codigo: " + producto.getCodigoProducto() + "\n";
+			reporte += "Nombre: " + producto.getNombre() + "\n";
+			reporte += "Unidades vendidas acumuladas: " + producto.getCantidadVentasAcumuladas() + "\n\n";
+		}
+		
+		return reporte;
+	}
+	
+	public String generarReporte4(ArrayList<Producto> productos) {
+		String reporte = "REPORTE\n\n";
+		
+		for (Producto producto : productos) {
+			reporte += "Codigo: " + producto.getCodigoProducto() + "\n";
+			reporte += "Nombre: " + producto.getNombre() + "\n";
+			reporte += "Importe total acumulado: " + producto.getCantidadImporteAcumulado() + "\n\n";
+		}
+		
+		return reporte;
+	}
+	
+	
 }

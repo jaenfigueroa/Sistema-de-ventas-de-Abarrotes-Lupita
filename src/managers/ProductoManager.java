@@ -68,7 +68,7 @@ public static Producto modificarProducto(int codigoProducto, String nombres, dou
         return productoEncontrado;
 	}
 	
-public static void eliminarProducto(int codigoProductoAEliminar) {
+public static int eliminarProducto(int codigoProductoAEliminar) {
 		
 		//Cliente productoEliminado = null;
 		
@@ -82,8 +82,7 @@ public static void eliminarProducto(int codigoProductoAEliminar) {
             }
 		}
 		
-		// devolver el usuario actualizado
-		//return clienteEliminado;
+		return -1;
 	}
 
 	public static ArrayList<Producto> listarProductos() {

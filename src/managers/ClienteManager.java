@@ -55,22 +55,16 @@ public class ClienteManager {
 	}
 	
 
-	public static void eliminarCliente(int codigoClienteAEliminar) {
-		
-		//Cliente clienteEliminado = null;
+	public static int eliminarCliente(int codigoClienteAEliminar) {
 		
 		for (int i = 0; i < ClienteManager.clientes.size(); i++) {
             if (ClienteManager.clientes.get(i).getCodigoCliente() == codigoClienteAEliminar) {
-            	
-            	//clienteEliminado = ClienteManager.clientes.get(codigoClienteAEliminar);
-            	
+            
             	ClienteManager.clientes.remove(i);
                 break;
             }
 		}
-		
-		// devolver el usuario actualizado
-		//return clienteEliminado;
+		return -1;
 	}
 
 	public static ArrayList<Cliente> listarClientes() {

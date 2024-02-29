@@ -13,6 +13,8 @@ import managers.ClienteManager;
 import managers.ProductoManager;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -125,11 +127,42 @@ public class ProductosFrame extends JFrame {
 		cb_opciones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int opcionElegida = cb_opciones.getSelectedIndex();
-
-				if (opcionElegida == 1 || opcionElegida == 2 || opcionElegida == 3) {
-					tf_codigoCliente.setEditable(true);
-				} else {
+				
+				if(opcionElegida == 0) {
 					tf_codigoCliente.setEditable(false);
+					tf_nombres.setEditable(true);
+					tf_precio.setEditable(true);
+					tf_StockActual.setEditable(true);
+					tf_StockMinimo.setEditable(true);
+					tf_StockMaximo.setEditable(true);
+				} else if (opcionElegida == 1) {
+					tf_codigoCliente.setEditable(true);
+					tf_nombres.setEditable(true);
+					tf_precio.setEditable(true);
+					tf_StockActual.setEditable(true);
+					tf_StockMinimo.setEditable(true);
+					tf_StockMaximo.setEditable(true);
+				} else if(opcionElegida == 2) {
+					tf_codigoCliente.setEditable(true);
+					tf_nombres.setEditable(false);
+					tf_precio.setEditable(false);
+					tf_StockActual.setEditable(false);
+					tf_StockMinimo.setEditable(false);
+					tf_StockMaximo.setEditable(false);
+				} else if (opcionElegida == 3) {
+					tf_codigoCliente.setEditable(true);
+					tf_nombres.setEditable(false);
+					tf_precio.setEditable(false);
+					tf_StockActual.setEditable(false);
+					tf_StockMinimo.setEditable(false);
+					tf_StockMaximo.setEditable(false);
+				} else if (opcionElegida == 4) {
+					tf_codigoCliente.setEditable(false);
+					tf_nombres.setEditable(false);
+					tf_precio.setEditable(false);
+					tf_StockActual.setEditable(false);
+					tf_StockMinimo.setEditable(false);
+					tf_StockMaximo.setEditable(false);
 				}
 			}
 		});
@@ -149,59 +182,61 @@ public class ProductosFrame extends JFrame {
 				
 				int codigoProducto = Integer.parseInt(tf_codigoCliente.getText());
 				
-				if (accionARealizar == 4) { // listar
-					limpiarTabla();
-					rellenartabla();
-
-				} else {
-
-					// Recoger los valores ingresados por el usuario
+				if(accionARealizar == 0) { // CREAR
 					String nombres = tf_nombres.getText();
 					double precio = Double.parseDouble(tf_precio.getText());
 					int stockActual = Integer.parseInt(tf_StockActual.getText());
 					int stockMinimo = Integer.parseInt(tf_StockMinimo.getText());
 					int stockMaximo = Integer.parseInt(tf_StockMaximo.getText());
 
-					switch (accionARealizar) {
+					Producto producto = new Producto(nombres, precio, stockActual, stockMinimo, stockMaximo);
+					ProductoManager.agregarProducto(producto);
+//					
+//					// Mostrar el codigo de cliente recién creado
+					tf_codigoCliente.setText(producto.getCodigoProducto() + "");
+					limpiarTabla();
+					rellenartabla();
 
-					// CREAR
-
-					case 0:
-
-						Producto producto = new Producto(nombres, precio, stockActual, stockMinimo, stockMaximo);
-						ProductoManager.agregarProducto(producto);
-//						
-//						// Mostrar el codigo de cliente recién creado
-						tf_codigoCliente.setText(producto.getCodigoProducto() + "");
-						limpiarTabla();
-						rellenartabla();
-						break;
-
-					// MODIFICAR
-					case 1:
-						Producto productoModificado = ProductoManager.modificarProducto(codigoProducto, nombres, precio,
-								stockActual, stockMinimo, stockMaximo);
-						limpiarTabla();
-						rellenartabla();
-						break;
-
-					// CONSULTAR
-					case 2:
+				} else if(accionARealizar == 1) {// MODIFICAR
+					String nombres = tf_nombres.getText();
+					double precio = Double.parseDouble(tf_precio.getText());
+					int stockActual = Integer.parseInt(tf_StockActual.getText());
+					int stockMinimo = Integer.parseInt(tf_StockMinimo.getText());
+					int stockMaximo = Integer.parseInt(tf_StockMaximo.getText());
+					
+					Producto productoModificado = ProductoManager.modificarProducto(codigoProducto, nombres, precio,
+							stockActual, stockMinimo, stockMaximo);
+					limpiarTabla();
+					rellenartabla();
+					
+					if(productoModificado == null) {
+						mostrarMensaje("El producto con el codigo " + codigoProducto + " no existe, no se modificó" );
+					}
+					
+				} else if(accionARealizar == 2) {// CONSULTAR
+					try {
 						Producto productoEncontrado = ProductoManager.consultarProducto(codigoProducto);
 						limpiarTabla();
 						rellenartabla(productoEncontrado);
-						break;
-
-					// ELIMINAR
-					case 3:
-						ProductoManager.eliminarProducto(codigoProducto);
-						limpiarTabla();
-						rellenartabla();
-						break;
+					} catch (Exception e2) {
+						mostrarMensaje("El producto con el codigo " + codigoProducto + " no existe");
 					}
+					
+				}else if(accionARealizar == 3) { // ELIMINAR
+					
+					int eliminado = ProductoManager.eliminarProducto(codigoProducto);
+					limpiarTabla();
+					rellenartabla();
 
+					
+					if(eliminado == -1) {
+						mostrarMensaje("El producto con el codigo " + codigoProducto + " no existe, no se eliminó");
+					}
+					
+				}else if(accionARealizar == 4) { // LISTAR
+					limpiarTabla();
+					rellenartabla();
 				}
-		
 			}
 		});
 		btn_ok.setBounds(623, 39, 85, 21);
@@ -252,5 +287,9 @@ public class ProductosFrame extends JFrame {
 					productos.get(i).getStockMaximo(), };
 			modelo.addRow(fila);
 		}
+	}
+	
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 	}
 }
