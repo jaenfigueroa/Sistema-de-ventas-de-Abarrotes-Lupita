@@ -5,10 +5,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
+import app.Main;
 import clases.Cliente;
-import managers.ClienteManager;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,7 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -126,7 +124,7 @@ public class ClientesFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int opcionElegida = cb_opciones.getSelectedIndex();
 
-				if(opcionElegida == 0) { // CREAR
+				if (opcionElegida == 0) { // CREAR
 					tf_codigoCliente.setEditable(false);
 					tf_nombres.setEditable(true);
 					tf_apellidos.setEditable(true);
@@ -140,7 +138,7 @@ public class ClientesFrame extends JFrame {
 					tf_direccion.setEditable(true);
 					tf_telefono.setEditable(true);
 					tf_dni.setEditable(true);
-				} else if(opcionElegida == 2) { // CONSULTAR
+				} else if (opcionElegida == 2) { // CONSULTAR
 					tf_codigoCliente.setEditable(true);
 					tf_nombres.setEditable(false);
 					tf_apellidos.setEditable(false);
@@ -183,7 +181,7 @@ public class ClientesFrame extends JFrame {
 				int accionARealizar = cb_opciones.getSelectedIndex();
 
 				// Elegir la accion a realizar
-				
+
 				Cliente cliente = null;
 				int codigoCliente = Integer.parseInt(tf_codigoCliente.getText());
 
@@ -192,7 +190,7 @@ public class ClientesFrame extends JFrame {
 				// CREAR
 				case 0:
 					cliente = new Cliente(nombres, apellidos, direccion, telefono, dni);
-					ClienteManager.agregarCliente(cliente);
+					Main.clienteManager.ingresar(cliente);
 
 					// Mostrar el codigo de cliente recién creado
 					tf_codigoCliente.setText(cliente.getCodigoCliente() + "");
@@ -201,50 +199,50 @@ public class ClientesFrame extends JFrame {
 
 				// MODIFICAR
 				case 1:
+
+					try {
+						Main.clienteManager.modificar(codigoCliente, nombres, apellidos, direccion, telefono, dni);
+
+					} catch (Exception e2) {
+						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe, no se editó");
+						System.out.println(e2);
+					}
 					
-					Cliente clienteModificado = ClienteManager.modificarCliente(
-							codigoCliente,
-							nombres,
-							apellidos,
-							direccion,
-							telefono,
-							dni);
 					rellenartabla();
 
-					if(clienteModificado == null) {
-						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe, no se editó");
-					}
-						
 					break;
 
 				// CONSULTAR
 				case 2:
 					try {
-						Cliente clienteEncontrado = ClienteManager.consultarCliente(codigoCliente);
+						Cliente clienteEncontrado = Main.clienteManager.consultar(codigoCliente);
 						limpiarTabla();
 						rellenartabla(clienteEncontrado);
 					} catch (Exception e2) {
 						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe");
 					}
-					
+
 					break;
 
 				// ELIMINAR
 				case 3:
-					int clienteEliminado = ClienteManager.eliminarCliente(codigoCliente);
-					rellenartabla();
-					
-					if(clienteEliminado == -1) {
+
+					try {
+						Main.clienteManager.eliminar(codigoCliente);
+						rellenartabla();
+
+					} catch (Exception e2) {
 						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe, no se eliminó");
 					}
-					
-					break;			
+
+					break;
 
 				// LISTAR
 				case 4:
 					rellenartabla();
-					break;	
-			}}
+					break;
+				}
+			}
 		});
 		btn_ok.setBounds(600, 41, 85, 21);
 		contentPane.add(btn_ok);
@@ -266,7 +264,7 @@ public class ClientesFrame extends JFrame {
 		modelo.addColumn("DNI");
 
 		tblTabla.setModel(modelo);
-		
+
 		JButton btnNewButton_1 = new JButton("Limpiar tabla");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -275,48 +273,37 @@ public class ClientesFrame extends JFrame {
 		});
 		btnNewButton_1.setBounds(565, 171, 120, 21);
 		contentPane.add(btnNewButton_1);
-		
+
 		rellenartabla();
 	}
 
-	// Metodos	
-	public void limpiarTabla() {		
+	// Metodos
+	public void limpiarTabla() {
 		while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
-        }
+			modelo.removeRow(0);
+		}
 	}
-	
-	public void rellenartabla(Cliente x) {		
+
+	public void rellenartabla(Cliente x) {
 		modelo.setRowCount(0);
-		Object[] fila = {
-				x.getCodigoCliente(),
-				x.getNombres(),
-				x.getApellidos(),
-				x.getDireccion(),
-				x.getTelefono(),
-				x.getDni(),
-		};
+		Object[] fila = { x.getCodigoCliente(), x.getNombres(), x.getApellidos(), x.getDireccion(), x.getTelefono(),
+				x.getDni(), };
 		modelo.addRow(fila);
 	}
-	
+
 	public void rellenartabla() {
-		ArrayList<Cliente> clientes = ClienteManager.listarClientes();
-		
+		ArrayList<Cliente> clientes = Main.clienteManager.listar();
+
 		for (int i = 0; i < clientes.size(); i++) {
-			
+
 			modelo.setRowCount(i);
-			Object[] fila = {
-					clientes.get(i).getCodigoCliente(),
-					clientes.get(i).getNombres(),
-					clientes.get(i).getApellidos(),
-					clientes.get(i).getDireccion(),
-					clientes.get(i).getTelefono(),
-					clientes.get(i).getDni(),
-			};
+			Object[] fila = { clientes.get(i).getCodigoCliente(), clientes.get(i).getNombres(),
+					clientes.get(i).getApellidos(), clientes.get(i).getDireccion(), clientes.get(i).getTelefono(),
+					clientes.get(i).getDni(), };
 			modelo.addRow(fila);
 		}
 	}
-	
+
 	public void mostrarMensaje(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 	}

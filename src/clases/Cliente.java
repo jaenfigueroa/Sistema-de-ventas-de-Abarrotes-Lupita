@@ -1,31 +1,30 @@
 package clases;
 
-public class Cliente {
+import clasesPadre.Item;
+
+public class Cliente extends Item implements interfaces.Cliente  {
 	
 	// Atributos
-	private int codigoCliente; // Autogenerado y correlativo a partir de 1001
 	private String nombres;
 	private String apellidos;
 	private String direccion;
 	private String telefono;
 	private String dni;
 	
-	// Variables de clase
 	private static int cantidadClientes;
 	
 	// Constantes de clase
 	private static final int CODIGO_CORRELATIVO_A_PARTIR;
 	
-	// Bloque de inicializacion static
 	static {
 		cantidadClientes = 0;
-		CODIGO_CORRELATIVO_A_PARTIR = 1001;
+		CODIGO_CORRELATIVO_A_PARTIR = 2001;
 	}
 	
 	// Contructores
-	public Cliente(String nombres, String apellidos, String direccion, String telefono, String dni) {
-		this.codigoCliente = Cliente.CODIGO_CORRELATIVO_A_PARTIR + Cliente.cantidadClientes;
-		
+	
+	public Cliente( String nombres, String apellidos, String direccion, String telefono, String dni) {
+		super(CODIGO_CORRELATIVO_A_PARTIR, cantidadClientes);
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
@@ -37,11 +36,11 @@ public class Cliente {
 
 	// Getters y Setters para atributos
 	public int getCodigoCliente() {
-		return this.codigoCliente;
+		return super.codigo;
 	}
 
 	public void setCodigoCliente(int codigoCliente) {
-		this.codigoCliente = codigoCliente;
+		super.codigo = codigoCliente;
 	}
 
 	public String getNombres() {
@@ -83,22 +82,4 @@ public class Cliente {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	
-	// Getters y Setters para variables de clase
-	public static int getCantidadClientes() {
-		return Cliente.cantidadClientes;
-	}
-
-	public static void setCantidadClientes(int cantidadClientes) {
-		Cliente.cantidadClientes = cantidadClientes;
-	}
-
-	// Getters para contantes de clase
-	public static int getCodigoCorrelativoAPartir() {
-		return Cliente.CODIGO_CORRELATIVO_A_PARTIR;
-	}
-	
-	
-	// Metodos
-	
 }

@@ -5,22 +5,18 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
-import clases.Cliente;
+
+import app.Main;
+
 import clases.Producto;
-import managers.ClienteManager;
-import managers.ProductoManager;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -190,7 +186,7 @@ public class ProductosFrame extends JFrame {
 					int stockMaximo = Integer.parseInt(tf_StockMaximo.getText());
 
 					Producto producto = new Producto(nombres, precio, stockActual, stockMinimo, stockMaximo);
-					ProductoManager.agregarProducto(producto);
+					Main.productoManager.ingresar(producto);
 //					
 //					// Mostrar el codigo de cliente recién creado
 					tf_codigoCliente.setText(producto.getCodigoProducto() + "");
@@ -204,7 +200,7 @@ public class ProductosFrame extends JFrame {
 					int stockMinimo = Integer.parseInt(tf_StockMinimo.getText());
 					int stockMaximo = Integer.parseInt(tf_StockMaximo.getText());
 					
-					Producto productoModificado = ProductoManager.modificarProducto(codigoProducto, nombres, precio,
+					Producto productoModificado = Main.productoManager.modificar(codigoProducto, nombres, precio,
 							stockActual, stockMinimo, stockMaximo);
 					limpiarTabla();
 					rellenartabla();
@@ -215,7 +211,7 @@ public class ProductosFrame extends JFrame {
 					
 				} else if(accionARealizar == 2) {// CONSULTAR
 					try {
-						Producto productoEncontrado = ProductoManager.consultarProducto(codigoProducto);
+						Producto productoEncontrado = Main.productoManager.consultar(codigoProducto);
 						limpiarTabla();
 						rellenartabla(productoEncontrado);
 					} catch (Exception e2) {
@@ -224,12 +220,12 @@ public class ProductosFrame extends JFrame {
 					
 				}else if(accionARealizar == 3) { // ELIMINAR
 					
-					int eliminado = ProductoManager.eliminarProducto(codigoProducto);
-					limpiarTabla();
-					rellenartabla();
-
-					
-					if(eliminado == -1) {
+					try {
+						Main.productoManager.eliminar(codigoProducto);
+						limpiarTabla();
+						rellenartabla();
+						
+					} catch (Exception e2) {
 						mostrarMensaje("El producto con el codigo " + codigoProducto + " no existe, no se eliminó");
 					}
 					
@@ -277,7 +273,7 @@ public class ProductosFrame extends JFrame {
 	}
 
 	public void rellenartabla() {
-		ArrayList<Producto> productos = ProductoManager.listarProductos();
+		ArrayList<Producto> productos = Main.productoManager.listar();
 
 		for (int i = 0; i < productos.size(); i++) {
 

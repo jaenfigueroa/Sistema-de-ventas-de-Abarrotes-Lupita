@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import app.Main;
 import clases.Producto;
 import clases.Venta;
 import managers.ProductoManager;
@@ -58,16 +59,16 @@ public class ReportesFrame extends JFrame {
 
 				switch (accionARealizar) {
 					case 0:
-						reporte += generarReporte1(VentaManager.getVentas());
+						reporte += generarReporte1(Main.ventaManager.listar());
 						break;
 					case 1:
-						reporte += generarReporte2(ProductoManager.getProductos());
+						reporte += generarReporte2(Main.productoManager.listar());
 						break;
 					case 2:
-						reporte += generarReporte3(ProductoManager.getProductos());
+						reporte += generarReporte3(Main.productoManager.listar());
 						break;
 					case 3:
-						reporte += generarReporte4(ProductoManager.getProductos());
+						reporte += generarReporte4(Main.productoManager.listar());
 						break;
 				}
 				
@@ -111,7 +112,7 @@ public class ReportesFrame extends JFrame {
 		modelo_2.addColumn("Stock maximo");
 		
 		// generar el reporte 1 por defecto
-		ta_salida.setText(generarReporte1(VentaManager.getVentas()));
+		ta_salida.setText(generarReporte1(Main.ventaManager.listar()));
 	}
 	
 	// metodos

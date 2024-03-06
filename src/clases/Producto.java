@@ -1,19 +1,17 @@
 package clases;
 
+import clasesPadre.Item;
 
-public class Producto {
+public class Producto extends Item implements interfaces.Producto {
 	
 	// Atributos
-	private int codigoProducto; // Autogenerado y correlativo a partir de 2001 
 	private String nombre;
 	private double precio;
 	private int stockActual;
 	private int stockMinimo;
 	private int stockMaximo;
 	
-	// cantidad acumulada de unidades vendidas
 	private int cantidadVentasAcumuladas;
-	// cantidad acumulada de importe a pagar
 	private double cantidadImporteAcumulado;
 	
 	// Variables de clase
@@ -30,8 +28,8 @@ public class Producto {
 	
 	// Contructores
 
-	public Producto(String nombre, double precio, int stockActual, int stockMinimo, int stockMaximo) {
-		this.codigoProducto =  Producto.CODIGO_CORRELATIVO_A_PARTIR + Producto.cantidadProductos;
+	public Producto(String nombre, double precio, int stockActual, int stockMinimo, int stockMaximo) {		
+		super(CODIGO_CORRELATIVO_A_PARTIR, cantidadProductos);
 		
 		this.nombre = nombre;
 		this.precio = precio;
@@ -44,11 +42,11 @@ public class Producto {
 	
 	// Getters y Setters
 	public int getCodigoProducto() {
-		return this.codigoProducto;
+		return super.codigo;
 	}
 
 	public void setCodigoProducto(int codigoProducto) {
-		this.codigoProducto = codigoProducto;
+		super.codigo = codigoProducto;
 	}
 
 	public String getNombre() {
@@ -120,9 +118,5 @@ public class Producto {
 	public static int getCodigoCorrelativoAPartir() {
 		return Producto.CODIGO_CORRELATIVO_A_PARTIR;
 	}	
-	
-	// Metodos
-	//public void actualizarStockAc
-	
 	
 }

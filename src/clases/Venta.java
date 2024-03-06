@@ -1,14 +1,13 @@
 package clases;
 
-import managers.ClienteManager;
-import managers.ProductoManager;
+import app.Main;
+import clasesPadre.Item;
 import utilidades.Utilidades;
 
-
-public class Venta {
+public class Venta extends Item implements interfaces.Venta {
 	
 	// Atributos
-	private int codigoVenta; // Autogenerado y correlativo a partir de 3001
+//	private int codigoVenta; // Autogenerado y correlativo a partir de 3001
 	private int codigoCliente;
 	private int codigoProducto;
 	private int cantidad;
@@ -36,10 +35,10 @@ public class Venta {
 	// Contructores
 	public Venta(int codigoCliente, int codigoProducto, int cantidad) {
 		
-		double precio = ProductoManager.consultarProducto(codigoProducto).getPrecio();
+		super(CODIGO_CORRELATIVO_A_PARTIR, cantidadVentas);
 		
-		this.codigoVenta = Venta.CODIGO_CORRELATIVO_A_PARTIR + Venta.cantidadVentas;
-
+		double precio = Main.productoManager.consultar(codigoProducto).getPrecio();
+		
 		this.codigoCliente = codigoCliente;
 		this.codigoProducto = codigoProducto;
 		this.cantidad = cantidad;
@@ -57,11 +56,11 @@ public class Venta {
 
 	// Getters y setters
 	public int getCodigoVenta() {
-		return this.codigoVenta;
+		return super.codigo;
 	}
 
 	public void setCodigoVenta(int codigoVenta) {
-		this.codigoVenta = codigoVenta;
+		super.codigo = codigoVenta;
 	}
 
 	public int getCodigoCliente() {
@@ -150,7 +149,7 @@ public class Venta {
 	// Metodos
 	public boolean comprobarStockActual(int cantidadUnidadesComprar) {
 		
-		Producto productoParaComprar = ProductoManager.getProductos().get(this.codigoProducto);
+		Producto productoParaComprar = Main.productoManager.listar().get(this.codigoProducto);
 		
 		return cantidadUnidadesComprar < productoParaComprar.getStockActual();
 	}
@@ -158,8 +157,8 @@ public class Venta {
 	public String obtenerBoleta() {
 		String boleta = "BOLETA DE PAGO\n";
 		
-		Cliente cliente = ClienteManager.consultarCliente(this.codigoCliente);
-		Producto producto = ProductoManager.consultarProducto(this.codigoProducto);
+		Cliente cliente = Main.clienteManager.consultar(this.codigoCliente);
+		Producto producto = Main.productoManager.consultar(this.codigoProducto);
 		
 		boleta += "Código del cliente: " + this.codigoCliente;
 		boleta += "Nombres y apellidos del cliente: " + cliente.getNombres();

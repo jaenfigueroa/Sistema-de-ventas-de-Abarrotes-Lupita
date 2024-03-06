@@ -5,18 +5,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
+import app.Main;
 import clases.Producto;
-import managers.ProductoManager;
-
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -72,7 +66,7 @@ public class AlmacenFrame extends JFrame {
 				int codigo = Integer.parseInt(tf_codigo.getText());
 				int cantidad = Integer.parseInt(tf_cantidad.getText());
 				
-				Producto producto = ProductoManager.consultarProducto(codigo);
+				Producto producto = Main.productoManager.consultar(codigo);
 				
 				if(producto == null) {
 					mostrarMensaje("EL producto no existe");

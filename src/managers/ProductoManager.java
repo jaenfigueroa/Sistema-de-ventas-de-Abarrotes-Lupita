@@ -1,91 +1,27 @@
 package managers;
 
-import java.util.ArrayList;
-
-import clases.Cliente;
 import clases.Producto;
+import clasesPadre.Manager;
 
-public class ProductoManager {
+public class ProductoManager extends Manager<Producto> {
 
-	// Variables de clase
-	private static ArrayList<Producto> productos;
-	
-	// Bloque de inicialización static
-	static {
-		productos = new ArrayList<>();
-	}
-	
-	// Getters y Setters para las variables de clase
-	public static ArrayList<Producto> getProductos() {
-		return ProductoManager.productos;
-	}
+	public Producto modificar(int codigo, String nombres, double precio, int stockActual, int stockMinimo, int stockMaximo) {
 
-	public static void setProductos(ArrayList<Producto> productos) {
-		ProductoManager.productos = productos;
-	}
-	
-	// METODOS
-	public static Producto agregarProducto(Producto productoNuevo) {
-		ProductoManager.productos.add(productoNuevo);
-		
-		return productoNuevo;
-	}
-	
-public static Producto modificarProducto(int codigoProducto, String nombres, double precio, int stockActual, int stockMinimo, int stockMaximo) {
-		
-		for (int i = 0; i < ProductoManager.productos.size(); i++) {
+		for (int i = 0; i < items.size(); i++) {
 
-            if (ProductoManager.productos.get(i).getCodigoProducto() == codigoProducto) {
+            if (items.get(i).getCodigoProducto() == codigo) {
             	
-            	Producto productoEncontrado = ProductoManager.productos.get(i);
-            	productoEncontrado.setNombre(nombres);
-            	productoEncontrado.setPrecio(precio);
-            	productoEncontrado.setStockActual(stockActual);
-            	productoEncontrado.setStockMinimo(stockMinimo);
-            	productoEncontrado.setStockMaximo(stockMaximo);
+            	Producto producto = items.get(i);
+
+            	producto.setNombre(nombres);
+            	producto.setPrecio(precio);
+            	producto.setStockActual(stockActual);
+            	producto.setStockMinimo(stockMinimo);
+            	producto.setStockMaximo(stockMaximo);
             	
-            	return productoEncontrado;
+            	return producto;
             }
 		}
 		return null;
-	
-		
-}
-		
-	
-	public static Producto consultarProducto(int codigoProductoBuscado) {
-		
-		Producto productoEncontrado = null;
-
-        for (Producto producto : ProductoManager.productos) {
-            if (producto.getCodigoProducto() == codigoProductoBuscado) {
-            	productoEncontrado = producto;
-                break;
-            }
-        }
-        
-     // devolver el producto actualizado
-        return productoEncontrado;
-	}
-	
-public static int eliminarProducto(int codigoProductoAEliminar) {
-		
-		//Cliente productoEliminado = null;
-		
-		for (int i = 0; i < ProductoManager.productos.size(); i++) {
-            if (ProductoManager.productos.get(i).getCodigoProducto() == codigoProductoAEliminar) {
-            	
-            	//clienteEliminado = ClienteManager.clientes.get(codigoClienteAEliminar);
-            	
-            	ProductoManager.productos.remove(i);
-                break;
-            }
-		}
-		
-		return -1;
-	}
-
-	public static ArrayList<Producto> listarProductos() {
-		return ProductoManager.productos;
 	}
 }

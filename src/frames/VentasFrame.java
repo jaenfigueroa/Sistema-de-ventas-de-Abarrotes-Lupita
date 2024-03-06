@@ -1,39 +1,26 @@
 package frames;
 
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
+import app.Main;
 import clases.Cliente;
 import clases.Producto;
 import clases.Venta;
-import managers.ClienteManager;
-import managers.ProductoManager;
-import managers.VentaManager;
-
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
 
 public class VentasFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tf_stockActualAnterior;
-	private DefaultTableModel modelo;
 	private JTextField tf_codigoProducto;
 	private JTextField tf_cantidad;
 	private JTextField tf_codigoCliente;
@@ -80,8 +67,8 @@ public class VentasFrame extends JFrame {
 				
 				
 				// conseguir el producto
-				Cliente cliente = ClienteManager.consultarCliente(codigoCliente);
-				Producto producto = ProductoManager.consultarProducto(codigoProducto);
+				Cliente cliente = Main.clienteManager.consultar(codigoCliente);
+				Producto producto = Main.productoManager.consultar(codigoProducto);
 				
 				if(producto == null) {
 					mostrarMensaje("EL producto no existe");
@@ -96,11 +83,10 @@ public class VentasFrame extends JFrame {
 				// comprobar el stock
 				if(cantidad <= producto.getStockActual()) {
 					// dejar hacer la venta
-					Venta venta = VentaManager.agregarVenta(
-							codigoCliente,
-							producto.getCodigoProducto(),
-							cantidad
-						);
+					
+					Venta venta = new Venta(codigoCliente, producto.getCodigoProducto(), cantidad);
+					
+					Main.ventaManager.ingresar(venta);
 					
 					// mostrar boleta
 					tf_stockActualAhora.setText(producto.getStockActual() + "");
@@ -163,8 +149,8 @@ public class VentasFrame extends JFrame {
 	
 	public void mostrarBoleta(Venta venta) {
 		
-		Producto producto = ProductoManager.consultarProducto(venta.getCodigoProducto());
-		Cliente cliente = ClienteManager.consultarCliente(venta.getCodigoCliente());
+		Producto producto = Main.productoManager.consultar(venta.getCodigoProducto());
+		Cliente cliente = Main.clienteManager.consultar(venta.getCodigoCliente());
 		
 		String boleta = "BOLETA DE VENTA\n\n";
 		boleta += "Fecha: " + venta.getFecha() + "\n\n";

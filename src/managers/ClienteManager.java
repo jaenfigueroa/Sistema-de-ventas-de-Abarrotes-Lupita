@@ -1,80 +1,27 @@
 package managers;
 
-import java.util.ArrayList;
-
 import clases.Cliente;
+import clasesPadre.Manager;
 
-public class ClienteManager {
+public class ClienteManager extends Manager<Cliente> {
 	
-	// Variables de clase
-	private static ArrayList<Cliente> clientes;
-	
-	// Bloque de inicialización static
-	static {
-		clientes = new ArrayList<Cliente>();
-	}
-	
-	// Metodos
-	public static Cliente agregarCliente(Cliente cliente) {
-		ClienteManager.clientes.add(cliente);
-		return cliente;
-	}
-	
-	public static Cliente modificarCliente(int codigoCliente, String nombres, String apellidos, String direccion, String telefono, String dni) {
-		
-		for (int i = 0; i < ClienteManager.clientes.size(); i++) {
+	public Cliente modificar(int codigo, String nombres, String apellidos, String direccion, String telefono, String dni) {
 
-            if (ClienteManager.clientes.get(i).getCodigoCliente() == codigoCliente) {
+		for (int i = 0; i < items.size(); i++) {
+
+            if (items.get(i).getCodigoCliente() == codigo) {
             	
-            	Cliente clienteEncontrado = ClienteManager.clientes.get(i);
-            	clienteEncontrado.setNombres(nombres);
-            	clienteEncontrado.setApellidos(apellidos);
-            	clienteEncontrado.setDireccion(direccion);
-            	clienteEncontrado.setTelefono(telefono);
-            	clienteEncontrado.setDni(dni);
+            	Cliente cliente = items.get(i);
+
+            	cliente.setNombres(nombres);
+            	cliente.setApellidos(apellidos);
+            	cliente.setDireccion(direccion);
+            	cliente.setTelefono(telefono);
+            	cliente.setDni(dni);
             	
-            	return clienteEncontrado;
+            	return cliente;
             }
 		}
 		return null;
 	}
-	
-	public static Cliente consultarCliente(int codigoClienteBuscado) {
-		
-		Cliente clienteEncontrado = null;
-
-        for (Cliente cliente : ClienteManager.clientes) {
-            if (cliente.getCodigoCliente() == codigoClienteBuscado) {
-            	clienteEncontrado = cliente;
-                break;
-            }
-        }
-        
-     // devolver el usuario actualizado
-        return clienteEncontrado;
-	}
-	
-
-	public static int eliminarCliente(int codigoClienteAEliminar) {
-		
-		for (int i = 0; i < ClienteManager.clientes.size(); i++) {
-            if (ClienteManager.clientes.get(i).getCodigoCliente() == codigoClienteAEliminar) {
-            
-            	ClienteManager.clientes.remove(i);
-                break;
-            }
-		}
-		return -1;
-	}
-
-	public static ArrayList<Cliente> listarClientes() {
-		return ClienteManager.clientes;
-	}
-	
-	// Metodos auxiliares
-	
-//	public static int buscarIndice() {
-//		
-//	}
-
 }
