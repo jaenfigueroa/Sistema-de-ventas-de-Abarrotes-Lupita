@@ -5,13 +5,10 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
 import app.Main;
 import clases.Cliente;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -119,7 +116,7 @@ public class ClientesFrame extends JFrame {
 		tf_codigoCliente.setBounds(107, 10, 236, 19);
 		contentPane.add(tf_codigoCliente);
 
-		JComboBox cb_opciones = new JComboBox();
+		JComboBox<String> cb_opciones = new JComboBox<String>();
 		cb_opciones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int opcionElegida = cb_opciones.getSelectedIndex();
@@ -162,14 +159,15 @@ public class ClientesFrame extends JFrame {
 				}
 			}
 		});
-		cb_opciones.setModel(
-				new DefaultComboBoxModel(new String[] { "Crear", "Modificar", "Consultar", "Eliminar", "Listar" }));
+		cb_opciones.setModel(new DefaultComboBoxModel<String>(
+				new String[] { "Crear", "Modificar", "Consultar", "Eliminar", "Listar" }));
 		cb_opciones.setBounds(459, 12, 226, 19);
 		contentPane.add(cb_opciones);
 
 		JButton btn_ok = new JButton("OK");
 		btn_ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				// Recoger los valores ingresados por el usuario
 				String nombres = tf_nombres.getText();
 				String apellidos = tf_apellidos.getText();
@@ -189,25 +187,33 @@ public class ClientesFrame extends JFrame {
 
 				// CREAR
 				case 0:
-					cliente = new Cliente(nombres, apellidos, direccion, telefono, dni);
-					Main.clienteManager.ingresar(cliente);
+					
+					try {
+						cliente = new Cliente(nombres, apellidos, direccion, telefono, dni);
+						Main.clienteManager.ingresar(cliente);
+						
+						// Mostrar el codigo de cliente recién creado
+						tf_codigoCliente.setText(cliente.getCodigoCliente() + "");
+						rellenartabla();
 
-					// Mostrar el codigo de cliente recién creado
-					tf_codigoCliente.setText(cliente.getCodigoCliente() + "");
-					rellenartabla();
+						mostrarMensaje("El cliente se creó exitosamente");
+					} catch (Exception e2) {
+						mostrarMensaje("Revisa los campos, ocurrio un error al crear el cliente");
+					}
+
 					break;
 
 				// MODIFICAR
 				case 1:
-
-					try {
-						Main.clienteManager.modificar(codigoCliente, nombres, apellidos, direccion, telefono, dni);
-
-					} catch (Exception e2) {
-						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe, no se editó");
-						System.out.println(e2);
-					}
 					
+					Cliente x = Main.clienteManager.modificar(codigoCliente, nombres, apellidos, direccion, telefono, dni);
+					
+					if(x == null) {
+						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe, no se editó");
+					} else {
+						mostrarMensaje("El cliente " + x.getNombres() + " fue actualizado");
+					}
+
 					rellenartabla();
 
 					break;
@@ -226,12 +232,13 @@ public class ClientesFrame extends JFrame {
 
 				// ELIMINAR
 				case 3:
-
-					try {
-						Main.clienteManager.eliminar(codigoCliente);
+					
+					boolean fueEliminado = Main.clienteManager.eliminar(codigoCliente);
+					
+					if(fueEliminado) {
+						mostrarMensaje("El cliente " + codigoCliente + " fue eliminado");
 						rellenartabla();
-
-					} catch (Exception e2) {
+					} else {
 						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe, no se eliminó");
 					}
 
@@ -277,7 +284,7 @@ public class ClientesFrame extends JFrame {
 		rellenartabla();
 	}
 
-	// Metodos
+	// METODOS
 	public void limpiarTabla() {
 		while (modelo.getRowCount() > 0) {
 			modelo.removeRow(0);

@@ -26,8 +26,7 @@ public class Producto extends Item implements interfaces.Producto {
 		CODIGO_CORRELATIVO_A_PARTIR = 2001;
 	}
 	
-	// Contructores
-
+	// Contructor
 	public Producto(String nombre, double precio, int stockActual, int stockMinimo, int stockMaximo) {		
 		super(CODIGO_CORRELATIVO_A_PARTIR, cantidadProductos);
 		

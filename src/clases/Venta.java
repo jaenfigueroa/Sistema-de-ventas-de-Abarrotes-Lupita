@@ -5,9 +5,7 @@ import clasesPadre.Item;
 import utilidades.Utilidades;
 
 public class Venta extends Item implements interfaces.Venta {
-	
 	// Atributos
-//	private int codigoVenta; // Autogenerado y correlativo a partir de 3001
 	private int codigoCliente;
 	private int codigoProducto;
 	private int cantidad;
@@ -34,7 +32,6 @@ public class Venta extends Item implements interfaces.Venta {
 	
 	// Contructores
 	public Venta(int codigoCliente, int codigoProducto, int cantidad) {
-		
 		super(CODIGO_CORRELATIVO_A_PARTIR, cantidadVentas);
 		
 		double precio = Main.productoManager.consultar(codigoProducto).getPrecio();

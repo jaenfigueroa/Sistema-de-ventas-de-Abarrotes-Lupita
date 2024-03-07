@@ -18,13 +18,13 @@ public class Cliente extends Item implements interfaces.Cliente  {
 	
 	static {
 		cantidadClientes = 0;
-		CODIGO_CORRELATIVO_A_PARTIR = 2001;
+		CODIGO_CORRELATIVO_A_PARTIR = 1001;
 	}
 	
 	// Contructores
-	
 	public Cliente( String nombres, String apellidos, String direccion, String telefono, String dni) {
 		super(CODIGO_CORRELATIVO_A_PARTIR, cantidadClientes);
+
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
