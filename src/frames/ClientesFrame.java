@@ -220,12 +220,14 @@ public class ClientesFrame extends JFrame {
 
 				// CONSULTAR
 				case 2:
-					try {
-						Cliente clienteEncontrado = Main.clienteManager.consultar(codigoCliente);
+					Cliente clienteEncontrado = Main.clienteManager.consultar(codigoCliente);
+					
+					if(clienteEncontrado == null) {
+						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe");
+					} else {
+						mostrarMensaje("El cliente con codigo " + codigoCliente + " fue encontrado");
 						limpiarTabla();
 						rellenartabla(clienteEncontrado);
-					} catch (Exception e2) {
-						mostrarMensaje("Un cliente con el codigo " + codigoCliente + " no existe");
 					}
 
 					break;
