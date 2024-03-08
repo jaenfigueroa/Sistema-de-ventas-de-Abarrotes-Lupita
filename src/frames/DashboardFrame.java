@@ -8,10 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import clases.Cliente;
-import clases.Producto;
-import clases.Venta;
-import app.Main;
 import javax.swing.border.EtchedBorder;
 
 public class DashboardFrame extends JFrame {

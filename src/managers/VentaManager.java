@@ -7,6 +7,7 @@ import clasesPadre.Manager;
 
 public class VentaManager extends Manager<Venta> {
 	
+	@Override
 	public void ingresar(Venta venta) {
 		super.ingresar(venta);
 		
