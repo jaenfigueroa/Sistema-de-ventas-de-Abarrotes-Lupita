@@ -70,24 +70,24 @@ public class AlmacenFrame extends JFrame {
 				
 				if(producto == null) {
 					mostrarMensaje("EL producto no existe");
-				}
-				
-				// mostrar valores de stock
-				tf_stockactualantes.setText(producto.getStockActual() + "");
-				
-				// verfiicar que el nuevo stock actual no supere el stock maximo
-				int nuevoStock = producto.getStockActual() + cantidad;
-				
-				if(nuevoStock <= producto.getStockMaximo()) {
-					// agregar normal
-					producto.setStockActual(nuevoStock);
-					
-					tf_stockactualahora.setText(producto.getStockActual() + "");
-					
-					rellenartabla(producto);
 				} else {
-					// mostra mensaje
-					mostrarMensaje("El nuevo stock supera el stock máximo");
+					// mostrar valores de stock
+					tf_stockactualantes.setText(producto.getStockActual() + "");
+					
+					// verfiicar que el nuevo stock actual no supere el stock maximo
+					int nuevoStock = producto.getStockActual() + cantidad;
+					
+					if(nuevoStock <= producto.getStockMaximo()) {
+						// agregar normal
+						producto.setStockActual(nuevoStock);
+						
+						tf_stockactualahora.setText(producto.getStockActual() + "");
+						
+						rellenartabla(producto);
+					} else {
+						// mostra mensaje
+						mostrarMensaje("El nuevo stock supera el stock máximo");
+					}
 				}
 			}
 		});
