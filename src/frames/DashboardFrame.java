@@ -108,16 +108,16 @@ public class DashboardFrame extends JFrame {
 		Main.clienteManager.ingresar(new Cliente("Sofia", "Rodriguez", "MZ C LT 8", "954875236", "987654321"));
 		Main.clienteManager.ingresar(new Cliente("Carlos", "Sanchez", "MZ I LT 13", "965874123", "654321987"));
 
-		Main.productoManager.ingresar(new Producto("Atún", 3.5, 5, 10, 200));
-		Main.productoManager.ingresar(new Producto("Aceite", 8.5, 10, 10, 200));
-		Main.productoManager.ingresar(new Producto("Yogurt", 5, 3, 10, 200));
-		Main.productoManager.ingresar(new Producto("Arroz", 4, 50, 10, 200));
-		Main.productoManager.ingresar(new Producto("Leche", 2.8, 8, 10, 200));
+		Main.productoManager.ingresar(new Producto("Atún", 3.5, 80, 10, 200));
+		Main.productoManager.ingresar(new Producto("Aceite", 8.5, 80, 10, 200));
+		Main.productoManager.ingresar(new Producto("Yogurt", 5, 80, 10, 200));
+		Main.productoManager.ingresar(new Producto("Arroz", 4, 80, 10, 200));
+		Main.productoManager.ingresar(new Producto("Leche", 2.8, 80, 10, 200));
 		Main.productoManager.ingresar(new Producto("Huevos", 6, 80, 10, 200));
-		Main.productoManager.ingresar(new Producto("Pan", 1.5, 25, 10, 200));
-		Main.productoManager.ingresar(new Producto("Pasta", 2.2, 30, 10, 200));
-		Main.productoManager.ingresar(new Producto("Jugo", 4.7, 7, 10, 200));
-		Main.productoManager.ingresar(new Producto("Cereal", 3.8, 65, 10, 200));
+		Main.productoManager.ingresar(new Producto("Pan", 1.5, 80, 10, 200));
+		Main.productoManager.ingresar(new Producto("Pasta", 2.2, 80, 10, 200));
+		Main.productoManager.ingresar(new Producto("Jugo", 4.7, 80, 10, 200));
+		Main.productoManager.ingresar(new Producto("Cereal", 3.8, 80, 10, 200));
 
 		Main.ventaManager.ingresar(new Venta(1001, 2001, 5));
 		Main.ventaManager.ingresar(new Venta(1002, 2002, 10));

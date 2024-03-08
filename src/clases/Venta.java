@@ -34,7 +34,8 @@ public class Venta extends Item implements interfaces.Venta {
 	public Venta(int codigoCliente, int codigoProducto, int cantidad) {
 		super(CODIGO_CORRELATIVO_A_PARTIR, cantidadVentas);
 		
-		double precio = Main.productoManager.consultar(codigoProducto).getPrecio();
+		Producto producto = Main.productoManager.consultar(codigoProducto);
+		double precio = producto.getPrecio();
 		
 		this.codigoCliente = codigoCliente;
 		this.codigoProducto = codigoProducto;
@@ -43,7 +44,10 @@ public class Venta extends Item implements interfaces.Venta {
 
 		this.fecha = Utilidades.obtenerFechaActualFormateadoMDA();
 		
+		// incrementamos la cantidad de ven
 		Venta.cantidadVentas++;
+		// disminuimos la cantidad de stock
+		producto.setStockActual(producto.getStockActual() - cantidad);
 		
 		// calcular
 		this.importeSubtotal = cantidad * precio;
