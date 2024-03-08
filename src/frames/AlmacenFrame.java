@@ -64,32 +64,36 @@ public class AlmacenFrame extends JFrame {
 				limpiar();
 				limpiarTabla();
 				
-				// recoger el codigo y la cantidad
-				int codigo = Integer.parseInt(tf_codigo.getText());
-				int cantidad = Integer.parseInt(tf_cantidad.getText());
-				
-				Producto producto = Main.productoManager.consultar(codigo);
-				
-				if(producto == null) {
-					mostrarMensaje("EL producto no existe");
-				} else {
-					// mostrar valores de stock
-					tf_stockactualantes.setText(producto.getStockActual() + "");
+				try {
+					// recoger el codigo y la cantidad
+					int codigo = Integer.parseInt(tf_codigo.getText());
+					int cantidad = Integer.parseInt(tf_cantidad.getText());
 					
-					// verfiicar que el nuevo stock actual no supere el stock maximo
-					int nuevoStock = producto.getStockActual() + cantidad;
+					Producto producto = Main.productoManager.consultar(codigo);
 					
-					if(nuevoStock <= producto.getStockMaximo()) {
-						// agregar normal
-						producto.setStockActual(nuevoStock);
-						
-						tf_stockactualahora.setText(producto.getStockActual() + "");
-						
-						rellenartabla(producto);
+					if(producto == null) {
+						mostrarMensaje("EL producto con el codigo " + codigo + " no existe");
 					} else {
-						// mostra mensaje
-						mostrarMensaje("El nuevo stock supera el stock máximo");
+						// mostrar valores de stock
+						tf_stockactualantes.setText(producto.getStockActual() + "");
+						
+						// verfiicar que el nuevo stock actual no supere el stock maximo
+						int nuevoStock = producto.getStockActual() + cantidad;
+						
+						if(nuevoStock <= producto.getStockMaximo()) {
+							// agregar normal
+							producto.setStockActual(nuevoStock);
+							
+							tf_stockactualahora.setText(producto.getStockActual() + "");
+							
+							rellenartabla(producto);
+						} else {
+							// mostra mensaje
+							mostrarMensaje("El nuevo stock supera el stock máximo");
+						}
 					}
+				} catch (Exception e2) {
+					mostrarMensaje("Revisa los campos ingresados, todos deben ser numeros");
 				}
 			}
 		});

@@ -46,8 +46,6 @@ public class Venta extends Item implements interfaces.Venta {
 		
 		// incrementamos la cantidad de ven
 		Venta.cantidadVentas++;
-		// disminuimos la cantidad de stock
-		producto.setStockActual(producto.getStockActual() - cantidad);
 		
 		// calcular
 		this.importeSubtotal = cantidad * precio;

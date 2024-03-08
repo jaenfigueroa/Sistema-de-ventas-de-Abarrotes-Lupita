@@ -98,10 +98,8 @@ public class VentasFrame extends JFrame {
 						// dejar hacer la venta
 
 						Venta venta = new Venta(codigoCliente, producto.getCodigoProducto(), cantidad);
-						Main.ventaManager.ingresar(venta); // OJO
+						Main.ventaManager.ingresar(venta);
 						
-						//Venta venta = Main.ventaManager.ingresar(codigoCliente, producto.getCodigoProducto(), cantidad);
-
 						// mostrar boleta
 						tf_stockActualAhora.setText(producto.getStockActual() + "");
 						mostrarBoleta(venta);
