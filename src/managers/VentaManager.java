@@ -21,8 +21,13 @@ public class VentaManager extends Manager<Venta> {
 		int nuevoStockActual = producto.getStockActual() - cantidad;
 		producto.setStockActual(nuevoStockActual);
 		
-		// actualizar la cantidad unidades vendidas
+		// actualizar la cantidad unidades vendidas		
 		int nuevaCantidadVentas = producto.getCantidadVentasAcumuladas() + cantidad;
+		
+		System.out.println(producto.getCantidadVentasAcumuladas());
+		System.out.println(cantidad);
+		System.out.println(nuevaCantidadVentas);
+		
 		producto.setCantidadVentasAcumuladas( nuevaCantidadVentas );
 		
 		// actualizar la cantidad importe total acumulado
