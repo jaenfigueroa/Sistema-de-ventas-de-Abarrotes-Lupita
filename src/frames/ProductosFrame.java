@@ -181,57 +181,82 @@ public class ProductosFrame extends JFrame {
 				int codigoProducto = Integer.parseInt(tf_codigoCliente.getText());
 
 				if (accionARealizar == 0) { // CREAR
-					String nombres = tf_nombres.getText();
-					double precio = Double.parseDouble(tf_precio.getText());
-					int stockActual = Integer.parseInt(tf_StockActual.getText());
-					int stockMinimo = Integer.parseInt(tf_StockMinimo.getText());
-					int stockMaximo = Integer.parseInt(tf_StockMaximo.getText());
+					try {
+						String nombres = tf_nombres.getText();
+						double precio = Double.parseDouble(tf_precio.getText());
+						int stockActual = Integer.parseInt(tf_StockActual.getText());
+						int stockMinimo = Integer.parseInt(tf_StockMinimo.getText());
+						int stockMaximo = Integer.parseInt(tf_StockMaximo.getText());
 
-					Producto producto = new Producto(nombres, precio, stockActual, stockMinimo, stockMaximo);
-					Main.productoManager.ingresar(producto);
-					
-					// Mostrar el codigo de cliente recién creado
-					tf_codigoCliente.setText(producto.getCodigoProducto() + "");
-					limpiarTabla();
-					rellenartabla();
+						Producto producto = new Producto(nombres, precio, stockActual, stockMinimo, stockMaximo);
+						Main.productoManager.ingresar(producto);
+						
+						// Mostrar el codigo de cliente recién creado
+						tf_codigoCliente.setText(producto.getCodigoProducto() + "");
+						limpiarTabla();
+						rellenartabla();
+
+					} catch (Exception e2) {
+						mostrarMensaje("Revisa los valores ingresados, solo el nombre debe ser un texto, los demas numeros");
+					}
 
 				} else if (accionARealizar == 1) {// MODIFICAR
-					String nombres = tf_nombres.getText();
-					double precio = Double.parseDouble(tf_precio.getText());
-					int stockActual = Integer.parseInt(tf_StockActual.getText());
-					int stockMinimo = Integer.parseInt(tf_StockMinimo.getText());
-					int stockMaximo = Integer.parseInt(tf_StockMaximo.getText());
-
-					Producto productoModificado = Main.productoManager.modificar(codigoProducto, nombres, precio,
-							stockActual, stockMinimo, stockMaximo);
-					limpiarTabla();
-					rellenartabla();
-
-					if (productoModificado == null) {
-						mostrarMensaje("El producto con el codigo " + codigoProducto + " no existe, no se modificó");
+					
+					try {
+						String nombres = tf_nombres.getText();
+						double precio = Double.parseDouble(tf_precio.getText());
+						int stockActual = Integer.parseInt(tf_StockActual.getText());
+						int stockMinimo = Integer.parseInt(tf_StockMinimo.getText());
+						int stockMaximo = Integer.parseInt(tf_StockMaximo.getText());
+						
+						Producto productoModificado = Main.productoManager.modificar(codigoProducto, nombres, precio, stockActual, stockMinimo, stockMaximo);
+						
+						if (productoModificado == null) {
+							mostrarMensaje("El producto con el codigo " + codigoProducto + " no existe, no se modificó");
+						} else {
+							mostrarMensaje("El producto con el codigo " + codigoProducto + " fue actulizado exitosamente");
+							
+							limpiarTabla();
+							rellenartabla();
+						}
+					} catch (Exception e2) {
+						mostrarMensaje("Revisa los campos, alguno no es valido");
 					}
 
 				} else if (accionARealizar == 2) {// CONSULTAR
+					
 					try {
 						Producto productoEncontrado = Main.productoManager.consultar(codigoProducto);
-						limpiarTabla();
-						rellenartabla(productoEncontrado);
+						
+						if(productoEncontrado == null) {
+							mostrarMensaje("El producto con el codigo " + codigoProducto + " no existe");
+						} else {
+							mostrarMensaje("El producto con el codigo " + codigoProducto + " fue encontrado");
+							limpiarTabla();
+							rellenartabla(productoEncontrado);
+						}
 					} catch (Exception e2) {
-						mostrarMensaje("El producto con el codigo " + codigoProducto + " no existe");
+						mostrarMensaje("EL codigo del producto no es valido, debe ser un numero");
 					}
 
 				} else if (accionARealizar == 3) { // ELIMINAR
 					
-					boolean seElimino = Main.productoManager.eliminar(codigoProducto);
-					
-					if(seElimino) {
-						mostrarMensaje("El producto se eliminó correctamente");
-					} else {
-						mostrarMensaje("El producto con el codigo " + codigoProducto + " no existe, no se eliminó");
+					try {
+						boolean seElimino = Main.productoManager.eliminar(codigoProducto);
+						
+						if(seElimino) {
+							mostrarMensaje("El producto se eliminó correctamente");
+						} else {
+							mostrarMensaje("El producto con el codigo " + codigoProducto + " no existe, no se eliminó");
+						}
+						
+						limpiarTabla();
+						rellenartabla();
+					} catch (Exception e2) {
+						mostrarMensaje("El codigo ingresado no es valido, debe ser un numero");
 					}
 					
-					limpiarTabla();
-					rellenartabla();
+
 					
 				} else if (accionARealizar == 4) { // LISTAR
 					limpiarTabla();
