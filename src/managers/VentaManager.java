@@ -7,33 +7,21 @@ import clasesPadre.Manager;
 
 public class VentaManager extends Manager<Venta> {
 	
-	public Venta ingresar(int codigoCliente, int codigoProducto, int cantidad) {
+	public void ingresar(Venta venta) {
+		super.ingresar(venta);
 		
-		// double precio = ProductoManager.consultarProducto(codigoProducto).getPrecio();
-		Venta ventaNueva = new Venta(codigoCliente, codigoProducto, cantidad);
-		
-		super.ingresar(ventaNueva);
+		Producto producto = Main.productoManager.consultar(venta.getCodigoProducto());
 		
 		// actualiza el stock actual del producto
-		Producto producto = Main.productoManager.consultar(codigoProducto);
-		
-		
-		int nuevoStockActual = producto.getStockActual() - cantidad;
+		int nuevoStockActual = producto.getStockActual() - venta.getCantidad();
 		producto.setStockActual(nuevoStockActual);
 		
 		// actualizar la cantidad unidades vendidas		
-		int nuevaCantidadVentas = producto.getCantidadVentasAcumuladas() + cantidad;
-		
-		System.out.println(producto.getCantidadVentasAcumuladas());
-		System.out.println(cantidad);
-		System.out.println(nuevaCantidadVentas);
-		
+		int nuevaCantidadVentas = producto.getCantidadVentasAcumuladas() + venta.getCantidad();
 		producto.setCantidadVentasAcumuladas( nuevaCantidadVentas );
 		
 		// actualizar la cantidad importe total acumulado
-		double nuevaCantidadImporteAcumulado = producto.getCantidadImporteAcumulado() + ventaNueva.getImporteTotalPagar();
+		double nuevaCantidadImporteAcumulado = producto.getCantidadImporteAcumulado() + venta.getImporteTotalPagar();
 		producto.setCantidadImporteAcumulado(nuevaCantidadImporteAcumulado);
-		
-		return ventaNueva;
 	}
 }
