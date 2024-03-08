@@ -15,6 +15,9 @@ import clases.Venta;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class VentasFrame extends JFrame {
 
@@ -31,9 +34,10 @@ public class VentasFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public VentasFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VentasFrame.class.getResource("/assets/verde-32.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 614, 406);
+		setBounds(100, 100, 678, 406);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
@@ -43,13 +47,13 @@ public class VentasFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Stock actual antes");
-		lblNewLabel.setBounds(398, 17, 105, 13);
+		JLabel lblNewLabel = new JLabel("Stock antes");
+		lblNewLabel.setBounds(291, 16, 83, 13);
 		contentPane.add(lblNewLabel);
 
 		tf_stockActualAnterior = new JTextField();
 		tf_stockActualAnterior.setEditable(false);
-		tf_stockActualAnterior.setBounds(513, 14, 76, 19);
+		tf_stockActualAnterior.setBounds(384, 13, 76, 19);
 		contentPane.add(tf_stockActualAnterior);
 		tf_stockActualAnterior.setColumns(10);
 
@@ -109,7 +113,7 @@ public class VentasFrame extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(232, 91, 87, 21);
+		btnNewButton.setBounds(185, 91, 87, 21);
 		contentPane.add(btnNewButton);
 
 		JLabel lblNewLabel_1_1 = new JLabel("Código producto");
@@ -117,17 +121,17 @@ public class VentasFrame extends JFrame {
 		contentPane.add(lblNewLabel_1_1);
 
 		tf_codigoProducto = new JTextField();
-		tf_codigoProducto.setBounds(152, 36, 167, 19);
+		tf_codigoProducto.setBounds(152, 36, 120, 19);
 		contentPane.add(tf_codigoProducto);
 		tf_codigoProducto.setColumns(10);
 
 		tf_cantidad = new JTextField();
 		tf_cantidad.setColumns(10);
-		tf_cantidad.setBounds(152, 62, 167, 19);
+		tf_cantidad.setBounds(152, 62, 120, 19);
 		contentPane.add(tf_cantidad);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 126, 579, 229);
+		scrollPane.setBounds(10, 126, 644, 229);
 		contentPane.add(scrollPane);
 
 		ta_salida = new JTextArea();
@@ -135,7 +139,7 @@ public class VentasFrame extends JFrame {
 
 		tf_codigoCliente = new JTextField();
 		tf_codigoCliente.setColumns(10);
-		tf_codigoCliente.setBounds(152, 14, 167, 19);
+		tf_codigoCliente.setBounds(152, 14, 120, 19);
 		contentPane.add(tf_codigoCliente);
 
 		JLabel lblNewLabel_1_1_1 = new JLabel("Código cliente");
@@ -145,12 +149,18 @@ public class VentasFrame extends JFrame {
 		tf_stockActualAhora = new JTextField();
 		tf_stockActualAhora.setEditable(false);
 		tf_stockActualAhora.setColumns(10);
-		tf_stockActualAhora.setBounds(513, 40, 76, 19);
+		tf_stockActualAhora.setBounds(384, 39, 76, 19);
 		contentPane.add(tf_stockActualAhora);
 
-		JLabel lblStockActualAhora = new JLabel("Stock actual ahora");
-		lblStockActualAhora.setBounds(398, 40, 105, 18);
+		JLabel lblStockActualAhora = new JLabel("Stock ahora");
+		lblStockActualAhora.setBounds(291, 39, 83, 18);
 		contentPane.add(lblStockActualAhora);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setIcon(new ImageIcon(VentasFrame.class.getResource("/assets/ventas-96.png")));
+		lblNewLabel_2.setBounds(483, 16, 171, 94);
+		contentPane.add(lblNewLabel_2);
 	}
 
 	public void mostrarMensaje(String mensaje) {

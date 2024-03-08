@@ -20,6 +20,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class ProductosFrame extends JFrame {
 
@@ -38,6 +41,7 @@ public class ProductosFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ProductosFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ProductosFrame.class.getResource("/assets/productos-32.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 731, 520);
@@ -254,6 +258,12 @@ public class ProductosFrame extends JFrame {
 		modelo.addColumn("Stock maximo");
 
 		tblTabla.setModel(modelo);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon(ProductosFrame.class.getResource("/assets/producto-128.png")));
+		lblNewLabel.setBounds(372, 45, 212, 122);
+		contentPane.add(lblNewLabel);
 
 		rellenartabla();
 	}

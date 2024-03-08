@@ -18,6 +18,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class ClientesFrame extends JFrame {
 
@@ -36,6 +39,7 @@ public class ClientesFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ClientesFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ClientesFrame.class.getResource("/assets/clientes-32.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 709, 520);
@@ -282,6 +286,12 @@ public class ClientesFrame extends JFrame {
 		});
 		btnNewButton_1.setBounds(565, 171, 120, 21);
 		contentPane.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(ClientesFrame.class.getResource("/assets/clientes-96.png")));
+		lblNewLabel_1.setBounds(372, 49, 183, 123);
+		contentPane.add(lblNewLabel_1);
 
 		rellenartabla();
 	}
