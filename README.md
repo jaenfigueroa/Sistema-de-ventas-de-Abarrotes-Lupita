@@ -8,7 +8,7 @@ El programa consta de los módulos de Mantenimiento, Ventas, Almacén y Reportes
 
 Como a muchos programas desarrollados encontramos algunas limitantes que nos servirá para corregir o desarrollar a profundidad otras funcionalidades. Actualmente el programa puede actualizar datos en tiempo real, pero no los almacena luego de cerrarlo. Además, al no estar conectado a una base de datos pierde la funcionalidad de entrelazarse a otros valores o datos para realizar un correcto análisis. 
 
-## Justificación del proyecto
+## Justificación
 
 La implementación de un sistema de ventas y control de salida de productos en una tienda es necesaria ya que va beneficiar las operaciones internas como el control de ventas realizadas diariamente, así como la cantidad de productos vendidos por cada tipo de producto, de tal manera que se podrá abastecer con los productos más demandados en el tiempo oportuno y poder atender eficientemente a los clientes.
 
@@ -28,7 +28,7 @@ Los beneficiarios indirectos de este proyecto son:
   - Los proveedores de productos, ya que al estar sistematizado el inventario se solicitará con anticipación el requerimiento de productos.
   - Transportistas, las empresas de transporte que entregan los productos a la tienda de abarrotes pueden beneficiarse al obtener contratos de transporte y servicios relacionados con la distribución de productos.
 
-## Objetivos del proyecto
+## Objetivos
 
 - Implementar un sistema de ventas a la tienda de abarrotes que le permita a los propietarios y empleados gestionar eficientemente su inventario, ventas y transacciones diarias. 
 - Mejorar la eficiencia operativa de la tienda de abarrotes mediante la automatización de procesos, como la gestión de inventario, el seguimiento de ventas, la facturación y la gestión de clientes. 
