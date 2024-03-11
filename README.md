@@ -9,6 +9,8 @@
 
 ## Integrantes
 
-- Jaen Redy Figueroa Llampi
-- Anita Graciela Cruzado Gamez
-- Rosario Doris Salinas Huamani
+- [Jaen Redy Figueroa Llampi](https://github.com/jaenfigueroa)
+- [Anita Graciela Cruzado Gamez](https://github.com/Graci94)
+- [Rosario Doris Salinas Huamán](https://github.com/RosarioSalinas1234)
+
+
