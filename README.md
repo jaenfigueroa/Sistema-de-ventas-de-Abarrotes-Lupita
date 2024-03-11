@@ -2,14 +2,14 @@
 
 ## Indice
 
-1. [Introducción](#introducción)
-2. [Justificación](#justificación)
-3. [Objetivos](#objetivos)
-4. [Definición](#definición)
-5. [Conclusiones](#conclusiones)
-6. [Recomendaciones](#recomendaciones)
-7. [Glosario](#glosario)
-8. [Integrantes](#integrantes)
+- [Introducción](#introducción)
+- [Justificación](#justificación)
+- [Objetivos](#objetivos)
+- [Definición](#definición)
+- [Conclusiones](#conclusiones)
+- [Recomendaciones](#recomendaciones)
+- [Glosario](#glosario)
+- [Integrantes](#integrantes)
 
 ## Introducción
 
