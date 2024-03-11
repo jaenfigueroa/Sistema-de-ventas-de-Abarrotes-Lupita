@@ -1,5 +1,16 @@
 # Sistema de ventas de Abarrotes Lupita
 
+## Indice
+
+1. [Introducción](#introducción)
+2. [Justificación](#justificación)
+3. [Objetivos](#objetivos)
+4. [Definición](#definición)
+5. [Conclusiones](#conclusiones)
+6. [Recomendaciones](#recomendaciones)
+7. [Glosario](#glosario)
+8. [Integrantes](#integrantes)
+
 ## Introducción
 
 El uso de la tecnología y el diseño e implementación de programas informáticos, va permitir a los comercializadores contar con sistemas eficientes para la venta de productos; llegando a tener un mayor control de los inventarios tanto de entrada como de salida de productos. La automatización de procesos administrativos, en la facturación de las ventas, número de ventas realizadas, así como el número de productos vendidos por cada tipo de producto; va permitir conocer en tiempo real la necesidad de incrementar los almacenes con los productos más demandados por los clientes, incrementando los ingresos económicos de la tienda, así como la atención oportuna de los clientes de acuerdo a sus necesidades.
