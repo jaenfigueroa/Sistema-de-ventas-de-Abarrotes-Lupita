@@ -71,16 +71,6 @@ Implementar en el sistema de ventas una variedad de métodos de pago, como efect
 - **Polimorfismo**: Se refiere a la capacidad de diferentes objetos de una jerarquía de clases para responder de manera única a un mismo mensaje o llamada a método.
 - **Variable**: Es una posición de memoria donde se puede almacenar un valor que se usará en el programa.
 
-## Bibliografía
-
-Curso Programación Orientada a Objetos con Java - TodoCode
-Curso de programación Java - La Geekipedia De Ernesto
-Curso Java para principiantes  - TodoCode
-Curso de Java desde 0 - pildorasinformaticas
-Java Grafico desde cero (Swing) - Danisable Programacion
-Java Swing - Codigo Facilito
-Manual Java - Linea de código
-
 ## Integrantes
 
 - [Jaen Redy Figueroa Llampi](https://github.com/jaenfigueroa)
