@@ -1,4 +1,4 @@
-# Sistema de ventas de abarrotes Lupita
+# Sistema de ventas de Abarrotes Lupita
 
 ## Introducción
 
